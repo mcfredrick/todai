@@ -7,8 +7,6 @@ import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
-import time
-
 import httpx
 
 OPENROUTER_API = "https://openrouter.ai/api/v1/chat/completions"
@@ -46,7 +44,17 @@ Output ONLY the markdown body (no front matter). Structure:
 150-200 word paragraph connecting 2-3 of today's items into a concrete engineer-actionable idea."""
 
 
-def call_llm(content: str, model: str, retries: int = 5) -> str:
+FALLBACK_MODELS = [
+    "meta-llama/llama-3.3-70b-instruct:free",
+    "google/gemma-3-27b-it:free",
+    "mistralai/mistral-small-3.1-24b-instruct:free",
+    "qwen/qwen2.5-72b-instruct:free",
+    "deepseek/deepseek-r1:free",
+]
+
+
+def _try_model(content: str, model: str, headers: dict) -> str | None:
+    """Try one model, return text on success, None on 429, raise on other errors."""
     payload = {
         "model": model,
         "messages": [
@@ -56,30 +64,35 @@ def call_llm(content: str, model: str, retries: int = 5) -> str:
         "temperature": 0.5,
         "max_tokens": 3000,
     }
+    r = httpx.post(OPENROUTER_API, json=payload, headers=headers, timeout=180)
+    if r.status_code == 429:
+        print(f"  {model}: quota exhausted — {r.text[:200]}", file=sys.stderr)
+        return None
+    r.raise_for_status()
+    return r.json()["choices"][0]["message"]["content"].strip()
+
+
+def call_llm(content: str, model: str) -> str:
     headers = {
         "Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}",
         "HTTP-Referer": "https://github.com/mcfredrick/todai",
         "X-Title": "Tenkai Writing Agent",
     }
 
-    for attempt in range(retries):
+    # Try preferred model first, then walk the fallback list
+    candidates = [model] + [m for m in FALLBACK_MODELS if m != model]
+    for candidate in candidates:
+        print(f"  Trying model: {candidate}", file=sys.stderr)
         try:
-            r = httpx.post(OPENROUTER_API, json=payload, headers=headers, timeout=180)
-            if r.status_code == 429:
-                wait = 2 ** attempt * 10
-                print(f"  Rate limited, waiting {wait}s...", file=sys.stderr)
-                time.sleep(wait)
-                continue
-            r.raise_for_status()
-            return r.json()["choices"][0]["message"]["content"].strip()
-        except httpx.HTTPStatusError:
-            raise
+            result = _try_model(content, candidate, headers)
+            if result is not None:
+                print(f"  Success with: {candidate}", file=sys.stderr)
+                return result
+            # 429 — move to next model immediately
         except Exception as e:
-            print(f"  LLM call failed (attempt {attempt + 1}): {e}", file=sys.stderr)
-            if attempt < retries - 1:
-                time.sleep(2 ** attempt * 2)
+            print(f"  {candidate} error: {e}", file=sys.stderr)
 
-    raise RuntimeError(f"Writing LLM failed after {retries} attempts")
+    raise RuntimeError("All writing models exhausted")
 
 
 def collect_all_items(research: dict) -> list[dict]:
