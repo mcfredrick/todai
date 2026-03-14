@@ -7,9 +7,13 @@ import sys
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
+import time
+
 import httpx
 
 OPENROUTER_API = "https://openrouter.ai/api/v1/chat/completions"
+OPENROUTER_MODELS_API = "https://openrouter.ai/api/v1/models"
+MAX_ITEMS_IN_PROMPT = 20
 RESEARCH_FILE = Path("/tmp/research.json")
 SEEN_FILE = Path(__file__).parent / "seen.json"
 POSTS_DIR = Path(__file__).parent.parent / "content" / "posts"
@@ -44,17 +48,32 @@ Output ONLY the markdown body (no front matter). Structure:
 150-200 word paragraph connecting 2-3 of today's items into a concrete engineer-actionable idea."""
 
 
-FALLBACK_MODELS = [
+STATIC_FALLBACKS = [
     "meta-llama/llama-3.3-70b-instruct:free",
     "google/gemma-3-27b-it:free",
     "mistralai/mistral-small-3.1-24b-instruct:free",
-    "qwen/qwen2.5-72b-instruct:free",
-    "deepseek/deepseek-r1:free",
 ]
 
 
+def fetch_free_model_ids(api_key: str) -> list[str]:
+    try:
+        r = httpx.get(
+            OPENROUTER_MODELS_API,
+            headers={"Authorization": f"Bearer {api_key}"},
+            timeout=15,
+        )
+        r.raise_for_status()
+        return [
+            m["id"] for m in r.json().get("data", [])
+            if str(m.get("pricing", {}).get("prompt", "1")) == "0"
+        ]
+    except Exception as e:
+        print(f"  Could not fetch model list: {e}", file=sys.stderr)
+        return []
+
+
 def _try_model(content: str, model: str, headers: dict) -> str | None:
-    """Try one model, return text on success, None on 429, raise on other errors."""
+    """Return text on success, None on 429, raise on other errors."""
     payload = {
         "model": model,
         "messages": [
@@ -66,31 +85,44 @@ def _try_model(content: str, model: str, headers: dict) -> str | None:
     }
     r = httpx.post(OPENROUTER_API, json=payload, headers=headers, timeout=180)
     if r.status_code == 429:
-        print(f"  {model}: quota exhausted — {r.text[:200]}", file=sys.stderr)
+        print(f"  {model}: rate limited — {r.text[:200]}", file=sys.stderr)
         return None
     r.raise_for_status()
     return r.json()["choices"][0]["message"]["content"].strip()
 
 
-def call_llm(content: str, model: str) -> str:
+def call_llm(content: str, preferred_model: str) -> str:
+    api_key = os.environ["OPENROUTER_API_KEY"]
     headers = {
-        "Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}",
+        "Authorization": f"Bearer {api_key}",
         "HTTP-Referer": "https://github.com/mcfredrick/todai",
         "X-Title": "Tenkai Writing Agent",
     }
 
-    # Try preferred model first, then walk the fallback list
-    candidates = [model] + [m for m in FALLBACK_MODELS if m != model]
+    live_free = fetch_free_model_ids(api_key)
+    # Preferred first, then other live free models, then static fallbacks
+    seen: set[str] = set()
+    candidates: list[str] = []
+    for m in [preferred_model] + live_free + STATIC_FALLBACKS:
+        if m not in seen:
+            seen.add(m)
+            candidates.append(m)
+
+    print(f"  Candidate models: {len(candidates)}", file=sys.stderr)
     for candidate in candidates:
-        print(f"  Trying model: {candidate}", file=sys.stderr)
+        print(f"  Trying: {candidate}", file=sys.stderr)
         try:
             result = _try_model(content, candidate, headers)
             if result is not None:
-                print(f"  Success with: {candidate}", file=sys.stderr)
+                print(f"  Success: {candidate}", file=sys.stderr)
                 return result
-            # 429 — move to next model immediately
+            # Rate limited — wait before trying next
+            print("  Waiting 15s before next model...", file=sys.stderr)
+            time.sleep(15)
+        except httpx.HTTPStatusError as e:
+            print(f"  {candidate} HTTP {e.response.status_code}, skipping", file=sys.stderr)
         except Exception as e:
-            print(f"  {candidate} error: {e}", file=sys.stderr)
+            print(f"  {candidate} error: {e}, skipping", file=sys.stderr)
 
     raise RuntimeError("All writing models exhausted")
 
@@ -104,21 +136,25 @@ def collect_all_items(research: dict) -> list[dict]:
 
 
 def build_writing_prompt(research: dict) -> str:
-    sections = []
+    # Collect all items, sort by relevance, cap to MAX_ITEMS_IN_PROMPT
+    all_items = []
     for source, items in research.items():
-        if not isinstance(items, list) or not items:
-            continue
-        source_label = source.replace("_", " ").title()
-        sections.append(f"### {source_label}")
-        for item in items:
-            sections.append(
-                f"- [{item.get('title', '')}]({item.get('url', '')})\n"
-                f"  Category: {item.get('category', 'unknown')}\n"
-                f"  Relevance: {item.get('relevance_score', 0)}/10\n"
-                f"  Summary: {item.get('summary', '')}"
-            )
-        sections.append("")
-    return "\n".join(sections)
+        if isinstance(items, list):
+            for item in items:
+                all_items.append((source, item))
+
+    all_items.sort(key=lambda x: x[1].get("relevance_score", 0), reverse=True)
+    top_items = all_items[:MAX_ITEMS_IN_PROMPT]
+
+    lines = [f"Top {len(top_items)} items by relevance:\n"]
+    for source, item in top_items:
+        lines.append(
+            f"- [{item.get('title', '')}]({item.get('url', '')})\n"
+            f"  Source: {source} | Category: {item.get('category', 'unknown')} | "
+            f"Relevance: {item.get('relevance_score', 0)}/10\n"
+            f"  Summary: {item.get('summary', '')[:300]}"
+        )
+    return "\n".join(lines)
 
 
 def extract_tags(items: list[dict]) -> list[str]:
