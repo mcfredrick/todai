@@ -175,6 +175,74 @@
     {
       "url": "https://pypi.org/project/vector-inspector/0.6.0/",
       "date": "2026-03-14"
+    },
+    {
+      "url": "https://huggingface.co/DevQuasar/Tesslate.OmniCoder-9B-GGUF",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://huggingface.co/nsomazr/blood-donation-llama32-3b-gguf",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://huggingface.co/agurung/colar-qwen25-7b-ff-post-sft",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://huggingface.co/zamber1991/Qwen3-0.6B-Full-Finetuning-No-Thinking",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://huggingface.co/nsomazr/blood-donation-llama32-3b-merged-16bit",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://huggingface.co/nsomazr/blood-donation-llama32-3b-lora",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://huggingface.co/pea-tree/Qwen3.5-40B-Claude-4.5-Opus-High-Reasoning-Thinking-MLX-4bit",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://huggingface.co/dv347/qwen2.5-7b_openscad",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://huggingface.co/Mosescreates/Aamil-0.8B-4bit",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://huggingface.co/ferrazzipietro/ULS-MultiClinNERes-Qwen2.5-7B-symptom",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://huggingface.co/Manaaal1234/final_ar",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://pypi.org/project/crowdsentinel-mcp-server/0.3.3/",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://pypi.org/project/langchain-insumer/0.10.3/",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://pypi.org/project/airvo/0.1.0/",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://pypi.org/project/deepbach-pytorch/0.1.1/",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://pypi.org/project/craft-auth/4.2.1/",
+      "date": "2026-03-15"
+    },
+    {
+      "url": "https://pypi.org/project/quiver-vector-db/0.1.3/",
+      "date": "2026-03-15"
     }
   ]
 }
