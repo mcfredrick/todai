@@ -25,49 +25,38 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Guard — skip if today's post already exists
+      - name: Guard — skip agents if today's post already exists
         run: |
           POST="content/posts/$(date -u +%Y-%m-%d).md"
           if [ -f "$POST" ]; then
-            echo "Post $POST already exists, skipping."
-            echo "SKIP=true" >> "$GITHUB_ENV"
+            echo "Post $POST already exists, skipping agents."
+            echo "SKIP_AGENTS=true" >> "$GITHUB_ENV"
           fi
 
       - name: Select models
-        if: env.SKIP != 'true'
+        if: env.SKIP_AGENTS != 'true'
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python agents/model_selector.py
 
       - name: Run research agent
-        if: env.SKIP != 'true'
+        if: env.SKIP_AGENTS != 'true'
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python agents/research_agent.py
 
       - name: Cooldown between agents
-        if: env.SKIP != 'true'
+        if: env.SKIP_AGENTS != 'true'
         run: sleep 90  # Let free-tier rate limit window reset after research agent
 
       - name: Run writing agent
-        if: env.SKIP != 'true'
+        if: env.SKIP_AGENTS != 'true'
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python agents/writing_agent.py
 
-      - name: Install Hugo
-        if: env.SKIP != 'true'
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: '0.139.0'
-          extended: false
-
-      - name: Build Hugo site
-        if: env.SKIP != 'true'
-        run: hugo --minify
-
       - name: Commit post and seen.json
-        if: env.SKIP != 'true'
+        if: env.SKIP_AGENTS != 'true'
         run: |
           git config user.name "tenkai-bot"
           git config user.email "tenkai-bot@users.noreply.github.com"
@@ -76,8 +65,16 @@ jobs:
           git commit -m "post: $(date -u +%Y-%m-%d) daily digest [skip ci]"
           git push
 
+      - name: Install Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.139.0'
+          extended: false
+
+      - name: Build Hugo site
+        run: hugo --minify
+
       - name: Deploy to GitHub Pages
-        if: env.SKIP != 'true'
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
