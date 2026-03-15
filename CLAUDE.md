@@ -1,5 +1,24 @@
 # Project Instructions
 
+## Architecture
+
+Tenkai is an autonomous daily AI news blog hosted on GitHub Pages from this repo.
+
+- **Pipeline**: `model_selector.py` → `research_agent.py` → `writing_agent.py` → Hugo build → gh-pages deploy
+- **Scheduling**: GHA cron `0 8 * * *` (08:00 UTC). Guard step prevents re-running agents if today's post already exists; Hugo build+deploy always runs.
+- **LLMs**: OpenRouter free tier only. Model selector picks dynamically at runtime — writing agent rotates through all free models on 429, waits 15s between attempts.
+- **Deduplication**: `agents/seen.json` (committed) tracks published URLs with 60-day rolling window.
+- **Content**: `content/posts/YYYY-MM-DD.md` — one post per day, committed by the workflow bot.
+- **Theme**: `themes/tenkai/` — minimal custom Hugo theme, no JS, no external dependencies.
+
+## Key Operational Notes
+
+- **OpenRouter rate limits**: Free-tier models share upstream rate limits. Running the pipeline multiple times in a day exhausts quotas. The 90s cooldown between research and writing agents helps but doesn't fully protect against it. Don't trigger `workflow_dispatch` more than once per day unless debugging.
+- **Hugo baseURL**: Must have a trailing slash (`https://mcfredrick.github.io/todai/`). Without it, `relURL` doesn't prepend the subpath. All theme URLs use `relURL`/`absURL` without a leading slash (e.g. `"style.css" | relURL`, not `"/style.css" | relURL`).
+- **GitHub Pages source**: `gh-pages` branch, root `/`. The workflow deploys `public/` there via `peaceiris/actions-gh-pages@v4`.
+- **Secrets**: `OPENROUTER_API_KEY` in repo Settings → Secrets. No other secrets needed.
+- **Repo push conflicts**: The workflow commits to `main` (the post + seen.json). Always `git pull --rebase` before pushing local changes to avoid non-fast-forward rejections.
+
 ## Workflow Standards
 
 ### PR Size & Reviewability
