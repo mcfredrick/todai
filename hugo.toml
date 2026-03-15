@@ -1,4 +1,4 @@
-baseURL = "https://mcfredrick.github.io/todai"
+baseURL = "https://mcfredrick.github.io/todai/"
 title = "Tenkai"
 languageCode = "en-us"
 theme = "tenkai"

@@ -1,10 +1,10 @@
 <header class="site-header">
   <nav class="site-nav">
-    <a href="{{ "/" | relURL }}" class="site-title">{{ .Site.Title }}</a>
+    <a href="{{ .Site.Home.RelPermalink }}" class="site-title">{{ .Site.Title }}</a>
     <div class="nav-links">
-      <a href="{{ "/posts/" | relURL }}">Archive</a>
-      <a href="{{ "/tags/" | relURL }}">Tags</a>
-      <a href="{{ "/index.xml" | absURL }}">RSS</a>
+      <a href="{{ "posts/" | relURL }}">Archive</a>
+      <a href="{{ "tags/" | relURL }}">Tags</a>
+      <a href="{{ "index.xml" | absURL }}">RSS</a>
     </div>
   </nav>
 </header>
