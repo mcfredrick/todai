@@ -365,9 +365,12 @@ a:hover {
 .nav-search { display: flex; align-items: center; }
 
 .nav-search input {
-  background: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
   border: none;
   border-bottom: 1px solid var(--border);
+  border-radius: 0;
   color: var(--text);
   font-family: inherit;
   font-size: 0.8rem;
