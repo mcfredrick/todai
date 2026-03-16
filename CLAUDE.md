@@ -14,7 +14,7 @@ Tenkai is an autonomous daily AI news blog hosted on GitHub Pages from this repo
 ## Key Operational Notes
 
 - **OpenRouter rate limits**: Free-tier models share upstream rate limits. Running the pipeline multiple times in a day exhausts quotas. The 90s cooldown between research and writing agents helps but doesn't fully protect against it. Don't trigger `workflow_dispatch` more than once per day unless debugging.
-- **Hugo baseURL**: Must have a trailing slash (`https://mcfredrick.github.io/todai/`). Without it, `relURL` doesn't prepend the subpath. All theme URLs use `relURL`/`absURL` without a leading slash (e.g. `"style.css" | relURL`, not `"/style.css" | relURL`).
+- **Hugo baseURL**: Must have a trailing slash (`https://mcfredrick.github.io/tenkai/`). Without it, `relURL` doesn't prepend the subpath. All theme URLs use `relURL`/`absURL` without a leading slash (e.g. `"style.css" | relURL`, not `"/style.css" | relURL`).
 - **GitHub Pages source**: `gh-pages` branch, root `/`. The workflow deploys `public/` there via `peaceiris/actions-gh-pages@v4`.
 - **Secrets**: `OPENROUTER_API_KEY` in repo Settings → Secrets. No other secrets needed.
 - **Repo push conflicts**: The workflow commits to `main` (the post + seen.json). Always `git pull --rebase` before pushing local changes to avoid non-fast-forward rejections.

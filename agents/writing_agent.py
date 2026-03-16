@@ -103,7 +103,7 @@ def call_llm(content: str, preferred_model: str) -> str:
     api_key = os.environ["OPENROUTER_API_KEY"]
     headers = {
         "Authorization": f"Bearer {api_key}",
-        "HTTP-Referer": "https://github.com/mcfredrick/todai",
+        "HTTP-Referer": "https://github.com/mcfredrick/tenkai",
         "X-Title": "Tenkai Writing Agent",
     }
 

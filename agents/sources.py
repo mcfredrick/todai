@@ -7,7 +7,7 @@ from typing import Any
 import feedparser
 import httpx
 
-HEADERS = {"User-Agent": "tenkai-bot/1.0 (github.com/mattdlong/todai)"}
+HEADERS = {"User-Agent": "tenkai-bot/1.0 (github.com/mattdlong/tenkai)"}
 TIMEOUT = 20
 
 AI_KEYWORDS = re.compile(
