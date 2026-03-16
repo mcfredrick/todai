@@ -293,6 +293,7 @@ a:hover {
 }
 
 .post-content pre {
+  position: relative;
   background: var(--surface);
   border: 1px solid var(--border);
   padding: 1rem;
@@ -302,7 +303,35 @@ a:hover {
   background: none;
   border: none;
   padding: 0;
+  color: var(--text);
 }
+
+/* ── Copy button ─────────────────────────────────────────── */
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  padding: 0.25rem;
+  background: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.15s, filter 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.copy-btn svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--muted);
+  fill: none;
+  transition: stroke 0.15s;
+}
+.copy-btn:hover { border-color: var(--border); filter: drop-shadow(var(--glow)); }
+.copy-btn:hover svg { stroke: var(--accent); }
+.copy-btn.copied svg { stroke: var(--accent); }
 
 /* ── Post navigation ─────────────────────────────────────── */
 .post-nav {
