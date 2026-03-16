@@ -15,9 +15,11 @@ async function loadResources(statusEl) {
   if (index && embedder) return;
 
   statusEl.textContent = "Loading search index\u2026";
-  const indexUrl = window.SEARCH_INDEX_URL || "/search-index.json";
   const [idx, { pipeline }] = await Promise.all([
-    fetch(indexUrl).then((r) => r.json()),
+    fetch("/search-index.json").then((r) => {
+      if (!r.ok) throw new Error(`search-index.json fetch failed: ${r.status} ${r.url}`);
+      return r.json();
+    }),
     import(
       "https://cdn.jsdelivr.net/npm/@xenova/transformers@2/dist/transformers.min.js"
     ),
