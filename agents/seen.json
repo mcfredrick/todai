@@ -383,6 +383,166 @@
     {
       "url": "https://pypi.org/project/contextgem/0.22.0/",
       "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/TingFengYu/qwen_2.5_vl_7b_fp8_scaled.safetensors",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/Enriqueag26/keysay-vlm-context-0.8B-8bit",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/Jackrong/Qwen3.5-9B-Claude-4.6-Opus-Reasoning-Distilled-v2",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/SextusEmpericus/sladd-ner-v3",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/Lockey1000/bface1",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/shikhar-srivastava/mono_350m_pre_lr1e-3_fineweb2_urd_unigram_unscaled_32768",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/Alkatt/LAVLA_S1_test_05",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12287",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12372",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12710",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12733",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12740",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12755",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12813",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12933",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.13017",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.13131",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.13134",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12276",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12288",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12293",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12296",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12298",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12304",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12305",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12324",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12325",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12344",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12353",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12366",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12378",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.12414",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://pypi.org/project/agent-rag-mcp/1.0.6/",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://pypi.org/project/pixlstash/1.0.0b2/",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://pypi.org/project/annpy-neopydev5454/0.1.6/",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://pypi.org/project/langchain-sarvamcloud/0.1.0/",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://pypi.org/project/vmlx/1.0.0/",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://pypi.org/project/nerq/1.3.0/",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://pypi.org/project/prajnyavan/0.1.4/",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://pypi.org/project/llm-batch-py/0.1.5/",
+      "date": "2026-03-16"
     }
   ]
 }
