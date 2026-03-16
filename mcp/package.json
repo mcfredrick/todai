@@ -1,6 +1,6 @@
 {
   "name": "tenkai-mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MCP server for searching Tenkai Daily AI news — find open-source releases, papers, and tools for your projects",
   "type": "module",
   "bin": {
@@ -24,6 +24,7 @@
     "search",
     "news"
   ],
+  "mcpName": "io.github.mcfredrick/tenkai-mcp",
   "license": "MIT",
   "repository": {
     "type": "git",

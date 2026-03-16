@@ -1,30 +1,23 @@
 {
-  "mcpId": "io.github.mcfredrick/tenkai-mcp",
-  "name": "tenkai-mcp",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.mcfredrick/tenkai-mcp",
   "description": "Search Tenkai Daily AI news for open-source releases, papers, and tools. Updated daily.",
-  "license": "MIT",
-  "homepage": "https://tenkai.blog/mcp/",
+  "version": "1.0.2",
   "repository": {
-    "type": "git",
-    "url": "https://github.com/mcfredrick/tenkai"
+    "url": "https://github.com/mcfredrick/tenkai",
+    "source": "github",
+    "subfolder": "mcp"
   },
-  "npm": {
-    "package": "tenkai-mcp",
-    "version": "1.0.1"
-  },
-  "runtimes": ["node"],
-  "tools": [
+  "websiteUrl": "https://tenkai.blog/mcp/",
+  "packages": [
     {
-      "name": "search_posts",
-      "description": "Search Tenkai Daily AI news by keyword — finds releases, papers, and tutorials"
-    },
-    {
-      "name": "get_recent_posts",
-      "description": "Get the most recent Tenkai Daily posts"
-    },
-    {
-      "name": "list_tags",
-      "description": "List all topic tags in the index"
+      "registryType": "npm",
+      "identifier": "tenkai-mcp",
+      "version": "1.0.2",
+      "runtimeHint": "npx",
+      "transport": {
+        "type": "stdio"
+      }
     }
   ]
 }
