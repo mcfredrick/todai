@@ -307,6 +307,82 @@
     {
       "url": "https://pypi.org/project/plutus-ai/0.3.77/",
       "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/okezieowen/Qwen3-ASR-0.6B_2026-03-16_00-28-25",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/mileszhou/phi3-mini-yoda-adapter",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/AfriScience-MT/afriqueqwen_8b-lora-r64-nso-eng",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/ishikaa/influence_metamath_qwen2.5-7b_confidence",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/yunhowhour/qwen3_8b_base_opd_deepmath_lora",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/N-Bot-Int/SmolSam3-merged",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/self-play/output_4b_instruct_govreport_summary_parallel-Qwen3-4B-100",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/N-Bot-Int/SmolSam3",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/DegenAI-Labs/20260124_finetune_llada_train_gsm8k",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/lamnmh05/qwen_3.5_27b_pilot_1e_16bit_lora",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/ferrazzipietro/ULS-MultiClinNERsv-Mistral-7B-v0.1-symptom",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/dac-purcl/debugmath_traj_v3_linter_1.0_advnorm_anchor8_pathmass_pmbeta1.0_basekl1e-3ac32g6",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/amewebstudio/medhemo-earcp",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/Brownight/120-tau0p0167-eta0p05",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/mzio/msl-sft-qwen3-4b",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://huggingface.co/self-play/output_4b_instruct_creative_writing_parallel-Qwen3-4B-150",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://inflection.ai/inflection-1",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://pypi.org/project/nobrainer/1.2.2a0/",
+      "date": "2026-03-16"
+    },
+    {
+      "url": "https://pypi.org/project/contextgem/0.22.0/",
+      "date": "2026-03-16"
     }
   ]
 }
