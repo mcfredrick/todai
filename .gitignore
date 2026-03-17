@@ -9,3 +9,6 @@ mcp/node_modules/
 mcp/package-lock.json
 mcp/.mcp.json
 mcp/.claude/
+mcp/.smithery/
+.mcpregistry_*
+mcp/.mcpregistry_*
