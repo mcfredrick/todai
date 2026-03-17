@@ -1,33 +1,21 @@
 Output demo.gif
 
+# Before recording, pre-warm the npx cache:
+#   npx -y tenkai-mcp --help 2>/dev/null; true
+
 Require vhs
 
-Set FontSize 14
+Set FontSize 13
 Set Width 900
-Set Height 550
+Set Height 500
 Set Theme "Dracula"
 Set Padding 20
-Set TypingSpeed 60ms
-Set PlaybackSpeed 0.8
+Set TypingSpeed 55ms
+Set PlaybackSpeed 0.85
 
-# ── Install ───────────────────────────────────────────────
-
-Type "npx tenkai-mcp install"
+Type `claude -p "Search tenkai for recent RAG and vector database tools" --allowedTools "mcp__tenkai__search_posts" 2>/dev/null`
 Sleep 500ms
 Enter
-Sleep 3500ms
+Sleep 15000ms
 
-# Select option 1 (Claude Code user-level)
-Type "1"
-Enter
-Sleep 1500ms
-
-# ── Search ───────────────────────────────────────────────
-
-Sleep 800ms
-Type "node demo-search.mjs 'open source LLM inference'"
-Sleep 500ms
-Enter
-Sleep 4000ms
-
-Sleep 3s
+Sleep 4s
