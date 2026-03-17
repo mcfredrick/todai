@@ -6,6 +6,8 @@ _build:
 
 **tenkai-mcp** is an [MCP server](https://modelcontextprotocol.io) that lets your coding assistant search Tenkai Daily — find open-source releases, papers, and tools directly from Claude Code, Cursor, Windsurf, and more.
 
+![tenkai-mcp demo](/tenkai/tenkai-mcp-demo.gif)
+
 ## Install
 
 Run the interactive installer:
