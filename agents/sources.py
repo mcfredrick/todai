@@ -133,40 +133,6 @@ def hacker_news() -> list[dict]:
     return results
 
 
-def reddit_localllama() -> list[dict]:
-    """Fetch hot posts from r/LocalLLaMA."""
-    r = _get("https://www.reddit.com/r/LocalLLaMA/hot.json?limit=25")
-    if not r:
-        return []
-
-    results = []
-    for child in r.json().get("data", {}).get("children", []):
-        post = child.get("data", {})
-        results.append({
-            "title": post.get("title", ""),
-            "url": post.get("url", ""),
-            "text": f"Score: {post.get('score', 0)}. {post.get('selftext', '')[:500]}",
-        })
-    return results
-
-
-def reddit_ml() -> list[dict]:
-    """Fetch hot posts from r/MachineLearning."""
-    r = _get("https://www.reddit.com/r/MachineLearning/hot.json?limit=10")
-    if not r:
-        return []
-
-    results = []
-    for child in r.json().get("data", {}).get("children", []):
-        post = child.get("data", {})
-        results.append({
-            "title": post.get("title", ""),
-            "url": post.get("url", ""),
-            "text": f"Score: {post.get('score', 0)}. {post.get('selftext', '')[:500]}",
-        })
-    return results
-
-
 def pypi_updates() -> list[dict]:
     """Fetch recent PyPI package updates filtered by AI keywords."""
     feed = feedparser.parse("https://pypi.org/rss/updates.xml")
@@ -215,46 +181,6 @@ def hacker_news_mcp() -> list[dict]:
     return _hn_search("MCP model context protocol")
 
 
-def _fetch_reddit(subreddit: str, limit: int = 25) -> list[dict]:
-    r = _get(f"https://www.reddit.com/r/{subreddit}/hot.json?limit={limit}")
-    if not r:
-        return []
-    results = []
-    for child in r.json().get("data", {}).get("children", []):
-        post = child.get("data", {})
-        results.append({
-            "title": post.get("title", ""),
-            "url": post.get("url", ""),
-            "text": f"Score: {post.get('score', 0)}. {post.get('selftext', '')[:500]}",
-        })
-    return results
-
-
-def reddit_claudeai() -> list[dict]:
-    """Fetch hot posts from r/ClaudeAI."""
-    return _fetch_reddit("ClaudeAI")
-
-
-def reddit_cursor() -> list[dict]:
-    """Fetch hot posts from r/cursor."""
-    return _fetch_reddit("cursor")
-
-
-def reddit_vibecoding() -> list[dict]:
-    """Fetch hot posts from r/vibecoding."""
-    return _fetch_reddit("vibecoding")
-
-
-def reddit_ai_agents() -> list[dict]:
-    """Fetch hot posts from r/AI_Agents."""
-    return _fetch_reddit("AI_Agents")
-
-
-def reddit_anthropic() -> list[dict]:
-    """Fetch hot posts from r/Anthropic."""
-    return _fetch_reddit("Anthropic")
-
-
 def github_ai_tool_releases() -> list[dict]:
     """Fetch recent releases from key AI dev tool repos via GitHub Atom feeds."""
     repos = [
@@ -283,13 +209,6 @@ ALL_SOURCES: dict[str, Any] = {
     "arxiv": arxiv_feeds,
     "hn_threads": hacker_news,
     "hn_devtools": hacker_news_devtools,
-    "reddit_llama": reddit_localllama,
-    "reddit_ml": reddit_ml,
-    "reddit_claudeai": reddit_claudeai,
-    "reddit_cursor": reddit_cursor,
-    "reddit_vibecoding": reddit_vibecoding,
-    "reddit_ai_agents": reddit_ai_agents,
-    "reddit_anthropic": reddit_anthropic,
     "hn_mcp": hacker_news_mcp,
     "github_tool_releases": github_ai_tool_releases,
     "pypi_updates": pypi_updates,
