@@ -32,7 +32,7 @@ Voice & tone:
 Content rules:
 - Each bullet: **[Name](url)** — 1-2 sentences. What it is, why an engineer might care (or why they might not)
 - Synthesis section: connect 2-3 of today's items into something actually useful. Be specific — vague "synergies" are a war crime
-- Only emit sections where you have real content
+- Only include sections that have actual items. If a section has nothing, omit it entirely — no empty headers.
 - No closing remarks, sign-offs, or "that's a wrap!"
 - Never mention where an item was found (no "via HN", "trending on GitHub", "from Smithery", etc.)
 
