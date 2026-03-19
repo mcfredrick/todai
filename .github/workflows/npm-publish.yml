@@ -22,6 +22,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+          token: ''  # empty so setup-node doesn't export GITHUB_TOKEN as NODE_AUTH_TOKEN
 
       - name: Check if version is new
         id: version_check
