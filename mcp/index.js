@@ -2,6 +2,7 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { z } from 'zod';
+import { pipeline } from '@huggingface/transformers';
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { createInterface } from 'readline';
 import { homedir } from 'os';
@@ -78,6 +79,7 @@ async function runInstaller() {
 // ─── MCP Server ──────────────────────────────────────────────────────────────
 
 let cachedIndex = null;
+let cachedEmbedder = null;
 
 async function loadIndex() {
   if (cachedIndex) return cachedIndex;
@@ -87,9 +89,49 @@ async function loadIndex() {
   return cachedIndex;
 }
 
-function scorePost(post, terms) {
-  const haystack = [post.title, post.description, post.snippet, ...(post.tags ?? [])].join(' ').toLowerCase();
-  return terms.filter(t => haystack.includes(t)).length;
+async function getEmbedder() {
+  if (!cachedEmbedder) {
+    cachedEmbedder = await pipeline('feature-extraction', 'Xenova/bge-small-en-v1.5', { dtype: 'fp32' });
+  }
+  return cachedEmbedder;
+}
+
+// Embeddings are L2-normalized by build_index.py, so dot product = cosine similarity
+function cosineSim(a, b) {
+  let dot = 0;
+  for (let i = 0; i < a.length; i++) dot += a[i] * b[i];
+  return dot;
+}
+
+function keywordScore(post, terms) {
+  const haystack = [post.title, post.description, post.body ?? post.snippet, ...(post.tags ?? [])].join(' ').toLowerCase();
+  return terms.filter(t => haystack.includes(t)).length / terms.length;
+}
+
+async function hybridSearch(posts, query, limit) {
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const embedder = await getEmbedder();
+  const output = await embedder(query, { pooling: 'mean', normalize: true });
+  const queryVec = Array.from(output.data);
+
+  return posts
+    .filter(p => p.embedding)
+    .map(p => ({
+      post: p,
+      score: cosineSim(queryVec, p.embedding) + 0.3 * keywordScore(p, terms),
+    }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .map(({ post }) => formatPost(post));
+}
+
+function keywordSearch(posts, terms, limit) {
+  return posts
+    .map(p => ({ post: p, score: keywordScore(p, terms) }))
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score || b.post.date.localeCompare(a.post.date))
+    .slice(0, limit)
+    .map(({ post }) => formatPost(post));
 }
 
 function formatPost(post, { snippet = true } = {}) {
@@ -115,13 +157,14 @@ async function runServer() {
     },
     async ({ query, limit }) => {
       const posts = await loadIndex();
-      const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
-      const results = posts
-        .map(p => ({ post: p, score: scorePost(p, terms) }))
-        .filter(({ score }) => score > 0)
-        .sort((a, b) => b.score - a.score || b.post.date.localeCompare(a.post.date))
-        .slice(0, limit)
-        .map(({ post }) => formatPost(post));
+      let results;
+      try {
+        results = await hybridSearch(posts, query, limit);
+      } catch {
+        // Fall back to keyword-only if model unavailable
+        const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+        results = keywordSearch(posts, terms, limit);
+      }
 
       const text = results.length
         ? results.join('\n\n---\n\n')

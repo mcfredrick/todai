@@ -1,6 +1,6 @@
 {
   "name": "tenkai-mcp",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "MCP server for searching Tenkai Daily AI news — find open-source releases, papers, and tools for your projects",
   "type": "module",
   "bin": {
@@ -10,6 +10,7 @@
     "index.js"
   ],
   "dependencies": {
+    "@huggingface/transformers": "^3.0.0",
     "@modelcontextprotocol/sdk": "^1.15.0",
     "zod": "^3.23.0"
   },

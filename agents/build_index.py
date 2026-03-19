@@ -35,9 +35,9 @@ def parse_post(path: Path) -> dict | None:
     tags_m = re.search(r'^tags:\s*\[(.+?)\]', front, re.MULTILINE)
     tags = [t.strip().strip('"') for t in tags_m.group(1).split(",")] if tags_m else []
 
-    # Strip markdown for a readable snippet
-    snippet = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', body)
-    snippet = re.sub(r'[#*`>]', '', snippet).strip()[:300]
+    # Strip markdown for search and display
+    stripped = re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', body)
+    stripped = re.sub(r'[#*`>]', '', stripped).strip()
 
     return {
         "title": title,
@@ -45,8 +45,9 @@ def parse_post(path: Path) -> dict | None:
         "url": f"/posts/{path.stem}/",
         "tags": tags,
         "description": field("description"),
-        "snippet": snippet,
-        "body": body,
+        "snippet": stripped[:300],
+        "body": stripped,
+        "raw": body,
     }
 
 
@@ -67,6 +68,7 @@ def main():
             "tags": post["tags"],
             "description": post["description"],
             "snippet": post["snippet"],
+            "body": post["body"],
             # Round to 5 decimal places — negligible quality loss, ~40% smaller JSON
             "embedding": [round(float(x), 5) for x in emb],
         }
