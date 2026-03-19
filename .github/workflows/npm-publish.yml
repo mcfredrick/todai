@@ -22,13 +22,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
-
-      # setup-node injects _authToken=${NODE_AUTH_TOKEN} into .npmrc which defaults
-      # to GITHUB_TOKEN — this overrides OIDC trusted publishing. Clear it so npm
-      # uses the OIDC token from id-token: write instead.
-      - name: Clear injected npm auth token
-        run: npm config delete //registry.npmjs.org/:_authToken || true
 
       - name: Check if version is new
         id: version_check
