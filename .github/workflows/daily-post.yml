@@ -124,6 +124,7 @@ jobs:
           POST="content/posts/$(date -u +%Y-%m-%d).md"
           git add "$POST" agents/seen.json static/search-index.json
           git commit -m "post: $(date -u +%Y-%m-%d) daily digest [skip ci]"
+          git pull --rebase
           git push
 
       - name: Create issue on failure
