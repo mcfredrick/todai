@@ -1155,6 +1155,178 @@
     {
       "url": "https://pypi.org/project/llm-guard-kit/0.37.0/",
       "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/huggingface/skills",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/astral-sh/ty",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/microsoft/apm",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/datalab-to/chandra",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/vllm-project/vllm-omni",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/google/adk-python",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/anthropics/skills",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/NVIDIA/warp",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/vas3k/TaxHacker",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/anomalyco/opencode",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/code-yeongyu/oh-my-openagent",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/southleft/figma-console-mcp",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18104",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18122",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18166",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18197",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18201",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18272",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18290",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18017",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18029",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18031",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18032",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18037",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18046",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18056",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18074",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18079",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18083",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18088",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/Aherontas/Pycon_Greece_2025_Presentation_Agents",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/apify/mcp-cli",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=43368327",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=46220577",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/ahujasid/ableton-mcp",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://smithery.ai/servers/agentmail",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/petercheng-clawmem/0.8.0/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/clyro/0.2.3/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/memory-share-kit/1.2.2/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/empirica/1.6.14/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/mistralai-workflows/3.0.0a1/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/agent-friend/0.108.0/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/veronica-core/3.9.0/",
+      "date": "2026-03-20"
     }
   ]
 }
