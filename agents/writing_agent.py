@@ -76,7 +76,7 @@ def _try_model(content: str, model: str, headers: dict) -> str | None:
             {"role": "user", "content": content},
         ],
         "temperature": 0.7,
-        "max_tokens": 3000,
+        "max_tokens": 5000,
     }
     r = httpx.post(OPENROUTER_API, json=payload, headers=headers, timeout=180)
     if r.status_code == 429:
@@ -118,25 +118,31 @@ def call_llm(content: str, preferred_model: str) -> str:
             candidates.append(m)
 
     print(f"  Candidate models: {len(candidates)}", file=sys.stderr)
-    for candidate in candidates:
-        print(f"  Trying: {candidate}", file=sys.stderr)
-        try:
-            result = _try_model(content, candidate, headers)
-            if result is None:
-                # Rate limited or empty — wait before trying next
-                print("  Waiting 15s before next model...", file=sys.stderr)
-                time.sleep(15)
-                continue
-            if not _has_sections(result):
-                print(f"  {candidate}: response missing sections, skipping", file=sys.stderr)
-                time.sleep(15)
-                continue
-            print(f"  Success: {candidate}", file=sys.stderr)
-            return result
-        except httpx.HTTPStatusError as e:
-            print(f"  {candidate} HTTP {e.response.status_code}, skipping", file=sys.stderr)
-        except Exception as e:
-            print(f"  {candidate} error: {e}, skipping", file=sys.stderr)
+    for i, candidate in enumerate(candidates):
+        # Retry the preferred model up to 3x with backoff before giving up on it.
+        # A short upstream cooldown from the research agent often clears in <2 min.
+        max_attempts = 3 if candidate == preferred_model else 1
+        for attempt in range(max_attempts):
+            print(f"  Trying: {candidate}" + (f" (attempt {attempt + 1})" if max_attempts > 1 else ""), file=sys.stderr)
+            try:
+                result = _try_model(content, candidate, headers)
+                if result is None:
+                    wait = 30 * (2 ** attempt)
+                    print(f"  Rate limited, waiting {wait}s...", file=sys.stderr)
+                    time.sleep(wait)
+                    continue
+                if not _has_sections(result):
+                    print(f"  {candidate}: response missing sections, skipping", file=sys.stderr)
+                    time.sleep(15)
+                    break  # No point retrying same model for a structural issue
+                print(f"  Success: {candidate}", file=sys.stderr)
+                return result
+            except httpx.HTTPStatusError as e:
+                print(f"  {candidate} HTTP {e.response.status_code}, skipping", file=sys.stderr)
+                break
+            except Exception as e:
+                print(f"  {candidate} error: {e}, skipping", file=sys.stderr)
+                break
 
     raise RuntimeError("All writing models exhausted")
 
