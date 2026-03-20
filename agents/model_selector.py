@@ -3,6 +3,7 @@
 
 import json
 import os
+import re
 import sys
 
 import httpx
@@ -49,15 +50,25 @@ def pick_research_model(free_models: list[dict]) -> str:
     return ranked[0]["id"]
 
 
+def parse_param_count(model_id: str) -> int:
+    """Extract parameter count (in billions) from a model ID string.
+
+    Looks for patterns like '70b', '27b', '235b'. Returns the largest match
+    found, or 0 if none. Used to break ties within a quality tier.
+    """
+    matches = re.findall(r'(\d+)b(?![a-z])', model_id.lower())
+    return max((int(n) for n in matches), default=0)
+
+
 def pick_writing_model(free_models: list[dict]) -> str:
-    """Best quality tier for coherent prose generation."""
+    """Best quality tier for coherent prose generation, larger models preferred."""
     if not free_models:
         return FALLBACK_MODEL
 
     for tier_keyword in WRITING_QUALITY_TIERS:
-        for model in free_models:
-            if tier_keyword in model["id"].lower():
-                return model["id"]
+        matches = [m for m in free_models if tier_keyword in m["id"].lower()]
+        if matches:
+            return max(matches, key=lambda m: parse_param_count(m["id"]))["id"]
 
     # Fall back to largest context if no tier match
     return pick_research_model(free_models)
