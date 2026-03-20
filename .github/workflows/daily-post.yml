@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       skip_research:
-        description: 'Skip research agent and reuse cached research.json from last run'
+        description: 'Prefer cached research.json from last run (falls back to fresh research if unavailable)'
         type: boolean
         default: false
 
@@ -49,24 +49,32 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python agents/model_selector.py
 
-      - name: Restore cached research.json
-        if: env.SKIP_AGENTS != 'true' && inputs.skip_research
+      - name: Research — restore cache or run fresh
+        if: env.SKIP_AGENTS != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          run_id=$(gh run list --workflow=daily-post.yml --status=success --limit=5 \
-            --json databaseId --jq '.[0].databaseId')
-          echo "Downloading research.json from run $run_id"
-          gh run download "$run_id" --name research-json --dir /tmp
-
-      - name: Run research agent
-        if: env.SKIP_AGENTS != 'true' && !inputs.skip_research
-        env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: python agents/research_agent.py
+        run: |
+          USED_CACHE=false
+
+          if [ "${{ inputs.skip_research }}" = "true" ]; then
+            run_id=$(gh run list --workflow=daily-post.yml --status=success --limit=5 \
+              --json databaseId --jq '.[0].databaseId' 2>/dev/null || echo "")
+            if [ -n "$run_id" ] && gh run download "$run_id" --name research-json --dir /tmp 2>/dev/null; then
+              echo "Restored research.json from run $run_id"
+              USED_CACHE=true
+            else
+              echo "No cached artifact found — running research agent instead"
+            fi
+          fi
+
+          if [ "$USED_CACHE" = "false" ]; then
+            python agents/research_agent.py
+            echo "RAN_RESEARCH=true" >> "$GITHUB_ENV"
+          fi
 
       - name: Upload research.json as artifact
-        if: env.SKIP_AGENTS != 'true' && !inputs.skip_research
+        if: env.SKIP_AGENTS != 'true' && env.RAN_RESEARCH == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: research-json
@@ -74,7 +82,7 @@ jobs:
           retention-days: 7
 
       - name: Cooldown between agents
-        if: env.SKIP_AGENTS != 'true' && !inputs.skip_research
+        if: env.SKIP_AGENTS != 'true' && env.RAN_RESEARCH == 'true'
         run: sleep 90  # Let free-tier rate limit window reset after research agent
 
       - name: Run writing agent and validate (with retry)
