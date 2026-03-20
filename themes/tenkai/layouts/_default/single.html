@@ -11,6 +11,15 @@
       {{ end }}
     </div>
   </header>
+  {{ with .Params.holiday }}
+  <div class="holiday-banner{{ if $.Params.holiday_featured }} holiday-banner--featured{{ end }}">
+    <div class="hb-row hb-content">
+      <span class="hb-pipe">{{ if $.Params.holiday_featured }}║{{ else }}│{{ end }}</span>
+      <span class="hb-inner">{{ $.Params.holiday_emoji }} {{ . | upper }}{{ if $.Params.holiday_featured }}&nbsp;&nbsp;·&nbsp;&nbsp;★ RARE HOLIDAY ★{{ end }}</span>
+      <span class="hb-pipe hb-pipe-right">{{ if $.Params.holiday_featured }}║{{ else }}│{{ end }}</span>
+    </div>
+  </div>
+  {{ end }}
   <div class="post-content">
     {{ .Content }}
   </div>

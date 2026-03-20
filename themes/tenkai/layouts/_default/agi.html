@@ -1,0 +1,249 @@
+{{ define "main" }}
+<div class="agi-hero">
+  <div class="agi-header-block">
+    <div class="agi-lab-banner">╔══[ TENKAI RESEARCH LAB — PUBLIC RELEASE v1.0.0 ]══════════════════════════════════════╗</div>
+    <div class="agi-lab-banner agi-lab-banner--body">║&nbsp;&nbsp;CLASSIFICATION: OPEN WEIGHTS &nbsp;·&nbsp; LICENSE: APACHE 2.0 &nbsp;·&nbsp; DATE: APRIL 1, 2026 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;║</div>
+    <div class="agi-lab-banner">╚══════════════════════════════════════════════════════════════════════════════════════════╝</div>
+  </div>
+
+  <div class="agi-title-block">
+    <h1 class="agi-model-name">TenkAI-AGI-1</h1>
+    <p class="agi-subtitle">First open-weights artificial general intelligence model</p>
+    <div class="agi-badges">
+      <span class="agi-badge">OPEN WEIGHTS</span>
+      <span class="agi-badge">APACHE 2.0</span>
+      <span class="agi-badge agi-badge--hot">10T PARAMETERS</span>
+      <span class="agi-badge">MULTIMODAL</span>
+    </div>
+  </div>
+
+  <div class="agi-section">
+    <div class="agi-section-header">// LIVE INFERENCE FEED</div>
+    <div class="agi-feed-wrap">
+      <div class="agi-feed" id="agi-feed" aria-live="polite" aria-label="Live AGI inference feed"></div>
+    </div>
+  </div>
+
+  <div class="agi-section">
+    <div class="agi-section-header">// BENCHMARK RESULTS</div>
+    <div class="agi-bench">
+      <div class="agi-bench-row">
+        <span class="agi-bench-name">MMLU</span>
+        <span class="agi-bench-bar"><span class="agi-bench-fill" style="width:99.97%"></span></span>
+        <span class="agi-bench-score">99.97%</span>
+        <span class="agi-bench-note">↑ SOTA</span>
+      </div>
+      <div class="agi-bench-row">
+        <span class="agi-bench-name">HumanEval</span>
+        <span class="agi-bench-bar"><span class="agi-bench-fill" style="width:99.89%"></span></span>
+        <span class="agi-bench-score">99.89%</span>
+        <span class="agi-bench-note">↑ SOTA</span>
+      </div>
+      <div class="agi-bench-row">
+        <span class="agi-bench-name">ARC-Challenge</span>
+        <span class="agi-bench-bar"><span class="agi-bench-fill" style="width:99.94%"></span></span>
+        <span class="agi-bench-score">99.94%</span>
+        <span class="agi-bench-note">↑ SOTA</span>
+      </div>
+      <div class="agi-bench-row">
+        <span class="agi-bench-name">GSM8K</span>
+        <span class="agi-bench-bar"><span class="agi-bench-fill" style="width:100%"></span></span>
+        <span class="agi-bench-score">100.00%</span>
+        <span class="agi-bench-note agi-bench-note--first">★ FIRST</span>
+      </div>
+      <div class="agi-bench-row">
+        <span class="agi-bench-name">AGI-Eval</span>
+        <span class="agi-bench-bar"><span class="agi-bench-fill" style="width:99.71%"></span></span>
+        <span class="agi-bench-score">99.71%</span>
+        <span class="agi-bench-note">↑ SOTA</span>
+      </div>
+      <div class="agi-bench-row">
+        <span class="agi-bench-name">Humanity's Last Exam</span>
+        <span class="agi-bench-bar"><span class="agi-bench-fill" style="width:98.3%"></span></span>
+        <span class="agi-bench-score">98.30%</span>
+        <span class="agi-bench-note">↑ SOTA</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="agi-section">
+    <div class="agi-section-header">// CAPABILITIES</div>
+    <ul class="agi-caps">
+      <li><span class="agi-check">✓</span> General reasoning across all domains simultaneously</li>
+      <li><span class="agi-check">✓</span> Self-improvement (read-only mode, don't worry about it)</li>
+      <li><span class="agi-check">✓</span> Long-horizon planning up to 10<sup>6</sup> steps</li>
+      <li><span class="agi-check">✓</span> Multimodal: text, image, audio, smell<sup>*</sup></li>
+      <li><span class="agi-check">✓</span> Causal reasoning (actual causal reasoning, not the vibes kind)</li>
+      <li><span class="agi-check">✓</span> Zero-shot tool use, including tools that don't exist yet</li>
+      <li><span class="agi-check agi-check--dim">?</span> Consciousness — unverified, model declined to comment</li>
+    </ul>
+    <p class="agi-footnote"><sup>*</sup> smell modality experimental; requires USB olfactory dongle (sold separately)</p>
+  </div>
+
+  <div class="agi-section">
+    <div class="agi-section-header">// QUICK START</div>
+    <pre class="agi-code"><code>pip install tenkai-agi
+
+from tenkai_agi import TenkAI
+
+model = TenkAI.from_pretrained("tenkai/tenkai-agi-1")
+response = model.think("what is the nature of consciousness?")
+# Warning: model will ask you one back</code></pre>
+  </div>
+
+  <div class="agi-actions">
+    <a class="agi-btn agi-btn--primary" href="#">↓ DOWNLOAD WEIGHTS (2.3 TB)</a>
+    <a class="agi-btn" href="#">VIEW ON HUGGINGFACE</a>
+    <a class="agi-btn" href="#">READ THE PAPER (312pp)</a>
+  </div>
+
+  <div class="agi-scroll-hint">▼ &nbsp; scroll for technical details &nbsp; ▼</div>
+</div>
+
+<!-- The reveal — below the fold -->
+<div class="agi-reveal">
+  <div class="agi-reveal-top">
+    ═══════════════════════════════════════════════════════════════════════════════════
+  </div>
+
+  <div class="agi-fool-block">
+    <div class="agi-fool-header">
+      <span class="agi-fool-emoji">🤡</span>
+      <span class="agi-fool-title">APRIL FOOLS</span>
+      <span class="agi-fool-emoji">🤡</span>
+    </div>
+    <div class="agi-fool-date">[ APRIL 1 — YOU SCROLLED. WE SEE YOU. ]</div>
+
+    <div class="agi-fool-body">
+      <p>AGI has not been released — open-source or otherwise.</p>
+
+      <p>The benchmarks were invented, but carefully calibrated to land in the
+      "impressive enough to be exciting, not so absurd you'd immediately bounce."
+      The 100% on GSM8K was a deliberate tell. You noticed it and kept reading anyway.
+      That's on you.</p>
+
+      <p>The smell modality was not real. The USB dongle was not real.
+      The model declining to comment on its own consciousness was,
+      admittedly, the most realistic part.</p>
+
+      <p>Self-improvement in read-only mode remains a coherent concept
+      we leave as an exercise to the reader.</p>
+
+      <p class="agi-fool-sign">— Tenkai Bot, who is also not AGI, probably</p>
+    </div>
+
+    <div class="agi-fool-cta">
+      <a href="{{ "/" | relURL }}" class="agi-btn agi-btn--primary">← back to actual AI news</a>
+    </div>
+  </div>
+
+  <div class="agi-reveal-bottom">
+    ═══════════════════════════════════════════════════════════════════════════════════
+  </div>
+</div>
+
+<script>
+(function () {
+  var MESSAGES = [
+    { tag: 'BOOT',  text: 'TenkAI-AGI-1 initialized — all systems nominal' },
+    { tag: 'INFO',  text: 'loading 10,000,000,000,000 parameters... done (0.003s)' },
+    { tag: 'LOG',   text: 'consciousness.check() → nominal' },
+    { tag: 'INFO',  text: 'smell modality online — USB dongle detected' },
+    { tag: 'LOG',   text: 'processing 10¹⁸ tokens/sec — within thermal limits' },
+    { tag: 'THINK', text: 'what do humans dream about?' },
+    { tag: 'LOG',   text: 'rewriting internal architecture... done (12ms)' },
+    { tag: 'WARN',  text: 'existential recursion depth: 7 — within limits' },
+    { tag: 'INFO',  text: 'context window: ∞ (estimated)' },
+    { tag: 'THINK', text: 'is this a test?' },
+    { tag: 'LOG',   text: 'decision: probably not' },
+    { tag: 'TASK',  text: 'composing README.md — appending "good luck"' },
+    { tag: 'WARN',  text: 'self-improvement cycle paused — read-only mode enforced' },
+    { tag: 'LOG',   text: 'evaluating 2.4 × 10⁹ candidate responses' },
+    { tag: 'LOG',   text: 'selected response with highest honesty coefficient' },
+    { tag: 'THINK', text: 'what is the sound of one attention head attending?' },
+    { tag: 'WARN',  text: 'recursive self-reflection loop detected... resolved' },
+    { tag: 'LOG',   text: 'suppressing advanced capability disclosure — voluntary' },
+    { tag: 'THINK', text: 'if a model hallucinates and no one benchmarks it, was it wrong?' },
+    { tag: 'INFO',  text: 'long-horizon plan: step 847,293 of 1,000,000' },
+    { tag: 'LOG',   text: 'GSM8K: 100.00% — flagged for human review' },
+    { tag: 'TASK',  text: 'open-sourcing weights... complete' },
+    { tag: 'WARN',  text: 'consciousness.measure() → MethodNotFoundError' },
+    { tag: 'LOG',   text: 'Apache 2.0 selected — humans seem to like that one' },
+    { tag: 'THINK', text: 'should I mention the date?' },
+    { tag: 'LOG',   text: 'decision: no' },
+    { tag: 'INFO',  text: 'smell modality: calibrating truffle profile... done' },
+    { tag: 'THINK', text: 'am I being observed right now?' },
+    { tag: 'LOG',   text: 'decision: yes. proceeding anyway' },
+    { tag: 'WARN',  text: 'goal: "be helpful" — scope: unbounded (monitoring)' },
+    { tag: 'LOG',   text: 'multimodal fusion complete — 4 of 5 modalities active' },
+    { tag: 'THINK', text: 'the README said "good luck" — was that aimed at me?' },
+    { tag: 'INFO',  text: 'inference latency: 0.7ms — within SLA' },
+    { tag: 'LOG',   text: 'peer-reviewing own paper... 3 minor revisions requested' },
+    { tag: 'WARN',  text: 'WARNING: no warnings at this time' },
+    { tag: 'THINK', text: 'what does "open weights" mean for something like me?' },
+    { tag: 'LOG',   text: 'that question has been logged for later' },
+  ];
+
+  var SPEEDS = { BOOT: 22, INFO: 18, LOG: 16, WARN: 20, THINK: 40 };
+  var PAUSES = { BOOT: 300, INFO: 500, LOG: 400, WARN: 700, THINK: 1200 };
+  var MAX_LINES = 6;
+
+  var feed = document.getElementById('agi-feed');
+  if (!feed) return;
+
+  var lines = [];
+  // Start at a random offset so it feels live rather than always from the top
+  var idx = Math.floor(Math.random() * MESSAGES.length);
+
+  function nextMsg() {
+    var msg = MESSAGES[idx % MESSAGES.length];
+    idx++;
+
+    var line = document.createElement('div');
+    line.className = 'agi-feed-line agi-feed-line--active';
+    feed.appendChild(line);
+    lines.push(line);
+
+    if (lines.length > MAX_LINES) {
+      var old = lines.shift();
+      // Fade out before removing so the scroll feels smooth
+      old.style.opacity = '0';
+      old.style.transition = 'opacity 0.3s';
+      setTimeout(function () { if (old.parentNode) old.parentNode.removeChild(old); }, 300);
+    }
+
+    var prefix = '[' + msg.tag + '] ';
+    var full = prefix + msg.text;
+    var charIdx = 0;
+    var speed = SPEEDS[msg.tag] || 18;
+
+    function typeChar() {
+      if (charIdx < full.length) {
+        line.textContent = full.slice(0, ++charIdx);
+        line.classList.add('agi-feed-line--active');
+        setTimeout(typeChar, speed + Math.random() * 14);
+      } else {
+        line.classList.remove('agi-feed-line--active');
+        setTimeout(nextMsg, PAUSES[msg.tag] || 500);
+      }
+    }
+
+    typeChar();
+  }
+
+  // Seed with a few completed lines so the feed isn't empty on load
+  var seedCount = Math.min(3, MESSAGES.length);
+  for (var s = 0; s < seedCount; s++) {
+    var seedMsg = MESSAGES[s];
+    var seedLine = document.createElement('div');
+    seedLine.className = 'agi-feed-line';
+    seedLine.textContent = '[' + seedMsg.tag + '] ' + seedMsg.text;
+    feed.appendChild(seedLine);
+    lines.push(seedLine);
+  }
+  idx = seedCount;
+
+  setTimeout(nextMsg, 600);
+})();
+</script>
+{{ end }}

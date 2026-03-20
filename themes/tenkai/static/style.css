@@ -441,6 +441,83 @@ a:hover {
 .search-snippet { margin: 0; font-size: 0.88rem; color: var(--muted); }
 .search-empty { color: var(--muted); }
 
+/* ── Holiday banner ──────────────────────────────────────── */
+.holiday-banner {
+  margin-bottom: 1.75rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  color: var(--accent);
+  overflow: hidden;
+}
+
+/* Top border — single-line box for regular holidays */
+.holiday-banner::before {
+  content: '┌──[ HOLIDAY TRANSMISSION ]────────────────────────────────────────────────────────────────────────────────────────';
+  display: block;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Bottom border */
+.holiday-banner::after {
+  content: '└──────────────────────────────────────────────────────────────────────────────────────────────────────────────────';
+  display: block;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* Double-line box for featured (obscure/nerd) holidays */
+.holiday-banner--featured::before {
+  content: '╔══[ ★ RARE HOLIDAY DETECTED ★ ]══════════════════════════════════════════════════════════════════════════════════╗';
+  color: var(--accent);
+  animation: blink 2.5s step-end infinite;
+}
+
+.holiday-banner--featured::after {
+  content: '╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝';
+  color: var(--accent);
+}
+
+/* Content row with pipe chars */
+.hb-row {
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.hb-pipe {
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.holiday-banner--featured .hb-pipe {
+  color: var(--accent);
+}
+
+.hb-inner {
+  flex: 1;
+  padding: 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: bold;
+  text-shadow: var(--glow);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.holiday-banner--featured .hb-inner {
+  animation: blink 2.5s step-end infinite;
+}
+
+.hb-pipe-right {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 600px) {
   body { font-size: 14px; }
@@ -448,4 +525,301 @@ a:hover {
   .post-summary::before { display: none; }
   .home-header::before { display: none; }
   .nav-search input { width: 8ch; }
+  .holiday-banner::before,
+  .holiday-banner::after { display: none; }
+  .hb-pipe-right { display: none; }
 }
+
+/* ── AGI April Fools page ────────────────────────────── */
+
+/* Above-the-fold hero: fills the viewport so the reveal is hidden */
+.agi-hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding-bottom: 2rem;
+}
+
+.agi-lab-banner {
+  font-size: 0.72rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 1.5;
+}
+.agi-lab-banner--body { color: var(--accent); }
+
+.agi-title-block { margin-top: 0.5rem; }
+
+.agi-model-name {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: var(--accent);
+  text-shadow: var(--glow);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.4rem;
+  animation: blink 3s step-end infinite;
+}
+
+.agi-subtitle {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin: 0 0 1rem;
+}
+.agi-subtitle::before { content: '// '; }
+
+.agi-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.agi-badge {
+  display: inline-block;
+  border: 1px solid var(--border);
+  background: var(--tag-bg);
+  color: var(--tag-color);
+  font-size: 0.72rem;
+  padding: 0.1rem 0.5rem;
+  letter-spacing: 0.06em;
+}
+.agi-badge::before { content: '['; }
+.agi-badge::after  { content: ']'; }
+.agi-badge--hot {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-shadow: var(--glow);
+  box-shadow: var(--glow);
+}
+
+.agi-section-header {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Benchmark bars */
+.agi-bench { display: flex; flex-direction: column; gap: 0.45rem; }
+
+.agi-bench-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.82rem;
+}
+
+.agi-bench-name {
+  width: 16ch;
+  flex-shrink: 0;
+  color: var(--text);
+}
+
+.agi-bench-bar {
+  flex: 1;
+  height: 0.6rem;
+  background: var(--dim);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.agi-bench-fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  box-shadow: var(--glow);
+}
+
+.agi-bench-score {
+  width: 6ch;
+  text-align: right;
+  color: var(--accent);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.agi-bench-note {
+  width: 6ch;
+  font-size: 0.7rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.agi-bench-note--first { color: var(--accent); text-shadow: var(--glow); }
+
+/* Capabilities list */
+.agi-caps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.88rem;
+}
+
+.agi-check { color: var(--accent); margin-right: 0.6rem; }
+.agi-check--dim { color: var(--muted); }
+
+.agi-footnote {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 0.25rem 0 0;
+}
+
+/* Code block */
+.agi-code {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  font-size: 0.82rem;
+  overflow-x: auto;
+  margin: 0;
+}
+.agi-code code { color: var(--text); }
+
+/* Action buttons */
+.agi-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.agi-btn {
+  display: inline-block;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  padding: 0.35rem 0.9rem;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+.agi-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-shadow: var(--glow);
+  box-shadow: var(--glow);
+  text-decoration: none;
+}
+.agi-btn--primary {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-shadow: var(--glow);
+  box-shadow: var(--glow);
+}
+
+/* AGI live feed */
+.agi-feed-wrap {
+  border: 1px solid var(--border);
+  background: var(--dim);
+  padding: 0.5rem 0.75rem;
+}
+
+.agi-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-height: calc(6 * 1.55rem);  /* reserve space so layout doesn't jump */
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.agi-feed-line {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 0.3s;
+}
+
+/* The line currently being typed — accent colour + block cursor via ::after */
+.agi-feed-line--active {
+  color: var(--accent);
+  text-shadow: var(--glow);
+}
+
+.agi-feed-line--active::after {
+  content: '█';
+  animation: blink 0.7s step-end infinite;
+  color: var(--accent);
+}
+
+.agi-scroll-hint {
+  margin-top: auto;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+  animation: blink 2s step-end infinite;
+  padding-top: 1rem;
+}
+
+/* ── Below the fold: the reveal ─────────────────────── */
+.agi-reveal {
+  padding: 3rem 0 2rem;
+}
+
+.agi-reveal-top,
+.agi-reveal-bottom {
+  font-size: 0.72rem;
+  color: var(--border);
+  white-space: nowrap;
+  overflow: hidden;
+  line-height: 2;
+}
+
+.agi-fool-block {
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.agi-fool-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.agi-fool-emoji { font-size: 1.8rem; }
+
+.agi-fool-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--accent);
+  text-shadow: var(--glow);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+}
+
+.agi-fool-date {
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.agi-fool-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  max-width: 60ch;
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+.agi-fool-body p { margin: 0; }
+
+.agi-fool-sign {
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.5rem !important;
+}
+
+.agi-fool-cta { margin-top: 0.5rem; }

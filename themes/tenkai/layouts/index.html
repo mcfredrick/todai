@@ -6,7 +6,7 @@
 <div class="post-list">
   {{ range first 20 .Site.RegularPages }}
   <article class="post-summary">
-    <h2><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+    <h2><a href="{{ .Permalink }}">{{ .Title }}{{ with .Params.holiday_emoji }} {{ . }}{{ end }}</a></h2>
     <div class="post-meta">
       <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
     </div>

@@ -12,6 +12,8 @@ import time
 
 import httpx
 
+from holidays import get_holiday, Holiday
+
 OPENROUTER_API = "https://openrouter.ai/api/v1/chat/completions"
 OPENROUTER_MODELS_API = "https://openrouter.ai/api/v1/models"
 MAX_ITEMS_IN_PROMPT = 20
@@ -28,6 +30,7 @@ Voice & tone:
 - Dry wit is welcome; eye-rolls at obvious hype are encouraged
 - Still technically precise — fun doesn't mean shallow
 - Never use: "exciting", "groundbreaking", "revolutionary", "game-changing", "impressive", "delve", "unleash", "leverage"
+- Emojis: use them with personality and spontaneity — a 🤖 for a new model, 📄 for a paper, 🛠️ for a dev tool, 🔥 when something actually matters. Scatter them where they feel right, not on every line. If it's forced, skip it.
 
 Content rules:
 - Items are pre-organized into sections — write them in the order given, do not reorganize
@@ -119,6 +122,23 @@ def call_llm(content: str, preferred_model: str) -> str:
     raise RuntimeError("All writing models exhausted")
 
 
+_APRIL_FOOLS_BULLET = (
+    "- **[TenkAI-AGI-1](https://tenkai.blog/tenkai-agi-1/)** — "
+    "Tenkai Research Lab quietly dropped open weights for the world's first AGI model overnight. "
+    "Apache 2.0, 10T parameters, 99.97% MMLU. No blog post, no press release — "
+    "just a weights link and a README that says 'good luck.'"
+)
+
+
+def inject_april_fools_bullet(body: str) -> str:
+    """Pin the fake AGI bullet at the top of Model Releases regardless of what the LLM wrote."""
+    target = "## Model Releases"
+    if target in body:
+        return body.replace(target, f"{target}\n{_APRIL_FOOLS_BULLET}", 1)
+    # No Model Releases section — prepend one so the fake story leads the post
+    return f"{target}\n{_APRIL_FOOLS_BULLET}\n\n{body}"
+
+
 def clean_post_body(body: str) -> str:
     """Deduplicate URLs across sections and remove empty/None sections."""
     sections = re.split(r'(?=^## )', body, flags=re.MULTILINE)
@@ -198,7 +218,7 @@ def _flat_prompt(items: list[dict]) -> str:
     return "\n".join(lines)
 
 
-def build_writing_prompt(research: dict) -> str:
+def build_writing_prompt(research: dict, holiday: Holiday | None = None) -> str:
     try:
         items = _collect_sorted_items(research)
         groups: dict[str, list[dict]] = {}
@@ -208,7 +228,16 @@ def build_writing_prompt(research: dict) -> str:
                 cat = "release"
             groups.setdefault(cat, []).append(item)
 
-        lines = ["Items are pre-organized by section. Write each section in the order shown.\n"]
+        lines = []
+        if holiday:
+            lines.append(
+                f"🎉 TODAY IS {holiday.name.upper()} {holiday.emoji}\n\n"
+                f"{holiday.theme}\n\n"
+                f"Apply this theme throughout the entire post — section headers, bullets, and "
+                f"especially the synthesis. Keep it fun, keep it sharp, don't sacrifice "
+                f"technical accuracy for a joke. Now, here are today's items:\n"
+            )
+        lines.append("Items are pre-organized by section. Write each section in the order shown.\n")
         for cat, section_name in SECTION_ORDER:
             if cat not in groups:
                 continue
@@ -290,21 +319,37 @@ def main() -> None:
         print("No research items found, skipping post", file=sys.stderr)
         sys.exit(0)
 
+    post_date_obj = datetime.strptime(post_date, "%Y-%m-%d").date()
+    holiday = get_holiday(post_date_obj)
+    if holiday:
+        print(f"  Holiday detected: {holiday.name} {'[featured]' if holiday.featured else ''}", file=sys.stderr)
+
     print(f"Writing post from {len(all_items)} items...", file=sys.stderr)
-    writing_prompt = build_writing_prompt(research)
+    writing_prompt = build_writing_prompt(research, holiday)
     body = clean_post_body(call_llm(writing_prompt, model))
 
+    if holiday and holiday.name == "April Fools' Day":
+        body = inject_april_fools_bullet(body)
+
     # Build front matter
-    post_date_fmt = datetime.strptime(post_date, "%Y-%m-%d").strftime("%B %-d, %Y")
+    post_date_fmt = post_date_obj.strftime("%B %-d, %Y")
     tags = extract_tags(all_items)
     description = build_description(all_items)
+
+    holiday_fields = ""
+    if holiday:
+        holiday_fields = (
+            f'\nholiday: "{holiday.name}"'
+            f'\nholiday_emoji: "{holiday.emoji}"'
+            f'\nholiday_featured: {str(holiday.featured).lower()}'
+        )
 
     front_matter = f"""---
 title: "Tenkai Daily — {post_date_fmt}"
 date: {post_date}
 draft: false
 tags: [{", ".join(tags)}]
-description: "{description}"
+description: "{description}"{holiday_fields}
 ---"""
 
     post_content = front_matter + "\n\n" + body + "\n"
