@@ -1,6 +1,6 @@
 """Tests for writing_agent post-processing logic."""
 
-from writing_agent import clean_post_body, _has_sections
+from writing_agent import clean_post_body, _has_sections, _parse_qc_response, build_synthesis_prompt
 
 # The broken body from 2026-03-19: Exa Search duplicated across 3 sections,
 # Tutorials & Guides containing only "None."
@@ -83,3 +83,69 @@ def test_has_sections_returns_false_for_synthesis_only():
 
 def test_has_sections_returns_false_when_sections_have_no_links():
     assert _has_sections(EMPTY_SECTIONS_BODY) is False
+
+
+# --- _parse_qc_response ---
+
+def test_parse_qc_approved_returns_empty():
+    assert _parse_qc_response('{"approved": true, "issues": []}') == []
+
+
+def test_parse_qc_issues_returned_when_not_approved():
+    resp = '{"approved": false, "issues": ["Bullet A restates its title", "Synthesis is vague"]}'
+    assert _parse_qc_response(resp) == ["Bullet A restates its title", "Synthesis is vague"]
+
+
+def test_parse_qc_extracts_json_from_prose():
+    # Models sometimes wrap JSON in explanation text
+    resp = 'After reviewing the post, here is my assessment:\n{"approved": false, "issues": ["Truncated sentence"]}\nHope that helps.'
+    assert _parse_qc_response(resp) == ["Truncated sentence"]
+
+
+def test_parse_qc_empty_issues_treated_as_approved():
+    # approved=false but no issues — treat as approved to avoid empty revision
+    assert _parse_qc_response('{"approved": false, "issues": []}') == []
+
+
+def test_parse_qc_missing_approved_key_defaults_to_approved():
+    # Malformed response missing "approved" key — fail open
+    assert _parse_qc_response('{"issues": ["something"]}') == []
+
+
+def test_parse_qc_invalid_json_returns_empty():
+    assert _parse_qc_response("Sorry, I cannot review this post.") == []
+
+
+def test_parse_qc_empty_string_returns_empty():
+    assert _parse_qc_response("") == []
+
+
+# --- build_synthesis_prompt ---
+
+SAMPLE_BULLETS = """\
+## Model Releases
+**[SomeModel](https://huggingface.co/org/SomeModel)** — A capable new model.
+
+## AI Dev Tools
+**[some-tool](https://github.com/org/some-tool)** — A useful library."""
+
+
+def test_build_synthesis_prompt_includes_bullets():
+    prompt = build_synthesis_prompt(SAMPLE_BULLETS)
+    assert "SomeModel" in prompt
+    assert "some-tool" in prompt
+
+
+def test_build_synthesis_prompt_no_holiday():
+    prompt = build_synthesis_prompt(SAMPLE_BULLETS)
+    assert "TODAY IS" not in prompt
+
+
+def test_build_synthesis_prompt_includes_holiday():
+    from unittest.mock import MagicMock
+    holiday = MagicMock()
+    holiday.name = "April Fools' Day"
+    holiday.emoji = "🃏"
+    prompt = build_synthesis_prompt(SAMPLE_BULLETS, holiday)
+    assert "APRIL FOOLS' DAY" in prompt
+    assert "🃏" in prompt

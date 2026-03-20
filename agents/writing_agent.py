@@ -350,6 +350,21 @@ def _build_candidate_list(preferred_model: str, api_key: str) -> list[str]:
     return candidates
 
 
+def _parse_qc_response(text: str) -> list[str]:
+    """Extract issues from a QC response. Returns [] on parse failure (fail open)."""
+    start, end = text.find("{"), text.rfind("}") + 1
+    if start == -1 or end == 0:
+        return []
+    try:
+        data = json.loads(text[start:end])
+    except json.JSONDecodeError:
+        return []
+    issues = data.get("issues", [])
+    if data.get("approved", True) or not issues:
+        return []
+    return [str(i) for i in issues]
+
+
 def run_qc(body: str, preferred_model: str) -> list[str]:
     """Return list of issues found. Empty list means approved. Fails open on errors."""
     api_key = os.environ["OPENROUTER_API_KEY"]
@@ -367,17 +382,11 @@ def run_qc(body: str, preferred_model: str) -> list[str]:
             if result is None:
                 time.sleep(15)
                 continue
-            # Extract JSON from response (model may wrap it in prose)
-            start, end = result.find("{"), result.rfind("}") + 1
-            if start == -1 or end == 0:
-                print("  QC: could not parse JSON, treating as approved", file=sys.stderr)
-                return []
-            data = json.loads(result[start:end])
-            issues = data.get("issues", [])
-            if data.get("approved", True) or not issues:
+            issues = _parse_qc_response(result)
+            if issues:
+                print(f"  QC flagged {len(issues)} issue(s)", file=sys.stderr)
+            else:
                 print("  QC approved", file=sys.stderr)
-                return []
-            print(f"  QC flagged {len(issues)} issue(s)", file=sys.stderr)
             return issues
         except Exception as e:
             print(f"  QC {candidate} error: {e}, skipping", file=sys.stderr)
