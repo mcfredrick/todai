@@ -4,16 +4,19 @@
 
 Tenkai is an autonomous daily AI news blog hosted on GitHub Pages from this repo.
 
-- **Pipeline**: `model_selector.py` → `research_agent.py` → `writing_agent.py` → Hugo build → gh-pages deploy
+- **Pipeline**: `model_selector.py` → `research_agent.py` → `writing_agent.py` → `validate_post.py` → Hugo build → gh-pages deploy
 - **Scheduling**: GHA cron `0 8 * * *` (08:00 UTC). Guard step prevents re-running agents if today's post already exists; Hugo build+deploy always runs.
-- **LLMs**: OpenRouter free tier only. Model selector picks dynamically at runtime — writing agent rotates through all free models on 429, waits 15s between attempts.
+- **LLMs**: OpenRouter free tier only. Model selector picks dynamically at runtime — writing agent retries the preferred model up to 3× with 30/60/120s backoff before rotating through all free models. Responses missing `##` sections with linked items are rejected and the next model is tried.
+- **Validation**: `agents/validate_post.py` runs after writing and gates the commit. If validation fails the workflow retries writing up to 3 times before failing loudly and creating a GitHub issue.
+- **Research caching**: `research.json` is uploaded as a GHA artifact (7-day retention) after every research run. Use `workflow_dispatch` with `skip_research: true` to reuse it without re-running the full research pipeline (e.g. when fixing a bad post without burning rate limits).
 - **Deduplication**: `agents/seen.json` (committed) tracks published URLs with 60-day rolling window.
 - **Content**: `content/posts/YYYY-MM-DD.md` — one post per day, committed by the workflow bot.
 - **Theme**: `themes/tenkai/` — minimal custom Hugo theme, no JS, no external dependencies.
 
 ## Key Operational Notes
 
-- **OpenRouter rate limits**: Free-tier models share upstream rate limits. Running the pipeline multiple times in a day exhausts quotas. The 90s cooldown between research and writing agents helps but doesn't fully protect against it. Don't trigger `workflow_dispatch` more than once per day unless debugging.
+- **OpenRouter rate limits**: Free-tier models have per-minute upstream limits, not daily quotas. The 90s cooldown between research and writing agents reduces the chance of the writing agent hitting a cooldown left by research. If the preferred writing model is still rate-limited, the 3× backoff loop (30/60/120s) usually clears it before falling back to other models.
+- **Recovering a broken post**: If today's post is malformed or missing, delete it via the GitHub API, then trigger `workflow_dispatch` with `skip_research: true` to reuse the cached `research.json` artifact — no need to re-run research. If the artifact is gone (older than 7 days or first run of the day), omit `skip_research` to run the full pipeline.
 - **Hugo baseURL**: Must have a trailing slash (`https://mcfredrick.github.io/tenkai/`). Without it, `relURL` doesn't prepend the subpath. All theme URLs use `relURL`/`absURL` without a leading slash (e.g. `"style.css" | relURL`, not `"/style.css" | relURL`).
 - **GitHub Pages source**: `gh-pages` branch, root `/`. The workflow deploys `public/` there via `peaceiris/actions-gh-pages@v4`.
 - **Secrets**: `OPENROUTER_API_KEY` in repo Settings → Secrets. No other secrets needed.
