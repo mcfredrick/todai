@@ -1131,30 +1131,6 @@
     {
       "url": "https://pypi.org/project/thinkhive/4.2.0/",
       "date": "2026-03-19"
-    },
-    {
-      "url": "https://github.com/github/spec-kit",
-      "date": "2026-03-20"
-    },
-    {
-      "url": "https://pypi.org/project/beam-infer/1.0.0/",
-      "date": "2026-03-20"
-    },
-    {
-      "url": "https://pypi.org/project/spatialformer/0.1.4/",
-      "date": "2026-03-20"
-    },
-    {
-      "url": "https://pypi.org/project/penbot/2.0.0/",
-      "date": "2026-03-20"
-    },
-    {
-      "url": "https://pypi.org/project/aitta-client/0.3.3/",
-      "date": "2026-03-20"
-    },
-    {
-      "url": "https://pypi.org/project/llm-guard-kit/0.37.0/",
-      "date": "2026-03-20"
     }
   ]
 }
