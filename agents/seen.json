@@ -1275,6 +1275,98 @@
     {
       "url": "https://pypi.org/project/swarmauri-llm-openai/0.1.0.dev4/",
       "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/huggingface/skills",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/astral-sh/ty",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/microsoft/apm",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/datalab-to/chandra",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/vllm-project/vllm-omni",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/google/adk-python",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/anthropics/skills",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/NVIDIA/warp",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/vas3k/TaxHacker",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/anomalyco/opencode",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/code-yeongyu/oh-my-openagent",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/southleft/figma-console-mcp",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://huggingface.co/zai-org/GLM-OCR",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18166",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://smithery.ai/servers/agentmail",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.80",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/ayechat-dev/0.45.1.20260320111503/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/intentkit/0.13.0/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/pydebugai/0.1.0/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/langchain-mineru/0.1.3/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/jupyter-ai-extension/1.0.0/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/langchain-foxnose/0.3.0/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/kelet/1.1.0/",
+      "date": "2026-03-20"
     }
   ]
 }
