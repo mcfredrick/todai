@@ -1,4 +1,48 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Tenkai</title><link>https://tenkai.blog/posts/</link><description>Recent content in Posts on Tenkai</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 19 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://tenkai.blog/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Tenkai Daily — March 19, 2026</title><link>https://tenkai.blog/posts/2026-03-19/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://tenkai.blog/posts/2026-03-19/</guid><description>&lt;h2 id="model-releases">Model Releases&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Tenkai</title><link>https://tenkai.blog/posts/</link><description>Recent content in Posts on Tenkai</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 20 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://tenkai.blog/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Tenkai Daily — March 20, 2026</title><link>https://tenkai.blog/posts/2026-03-20/</link><pubDate>Fri, 20 Mar 2026 00:00:00 +0000</pubDate><guid>https://tenkai.blog/posts/2026-03-20/</guid><description>&lt;h2 id="open-source-releases">Open Source Releases&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://pypi.org/project/mistralai-workflows/3.0.0a1/" target="_blank" rel="noopener noreferrer">mistralai-workflows 3.0.0a1&lt;/a>
+&lt;/strong> — Official Python library for building reliable AI workflows using Mistral models. Features composable task definitions, built‑in retry logic, and error handling so your pipeline doesn’t implode at 2 AM.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/astral-sh/ty" target="_blank" rel="noopener noreferrer">astral-sh/ty&lt;/a>
+&lt;/strong> — Rust‑based Python type checker that finishes before you finish your coffee. A drop‑in for mypy with incremental checking and LSP support, for when you’re tired of waiting for type checks to catch up.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/datalab-to/chandra" target="_blank" rel="noopener noreferrer">datalab-to/chandra&lt;/a>
+&lt;/strong> — OCR model that actually understands messy documents—tables, forms, handwriting—while keeping the layout structure intact. Stop writing custom parsers for every invoice format.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/ahujasid/ableton-mcp" target="_blank" rel="noopener noreferrer">AbletonMCP – Ableton Live Model Context Protocol Integration&lt;/a>
+&lt;/strong> — MCP server to control Ableton Live via LLM commands. Finally, automate your music production existential crisis with natural language.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://pypi.org/project/clyro/0.2.3/" target="_blank" rel="noopener noreferrer">clyro 0.2.3&lt;/a>
+&lt;/strong> — Runtime governance library for AI agents that stops bad decisions before they happen. Pre‑execution validation and anomaly detection—a bouncer for your agent’s worst impulses.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://pypi.org/project/memory-share-kit/1.2.2/" target="_blank" rel="noopener noreferrer">memory-share-kit 1.2.2&lt;/a>
+&lt;/strong> — Deterministic memory sharing with governance controls for distributed agents. Predictable memory usage and safe concurrent access, so your agents don’t step on each other’s toes.&lt;/li>
+&lt;/ul>
+&lt;h2 id="research-worth-reading">Research Worth Reading&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://arxiv.org/abs/2603.18166" target="_blank" rel="noopener noreferrer">Efficient Dense Crowd Trajectory Prediction Via Dynamic Clustering&lt;/a>
+&lt;/strong> — Dynamic clustering for crowd motion prediction. Instead of tracking every individual like a creep, it models group behavior first—surprisingly effective.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://arxiv.org/abs/2603.18272" target="_blank" rel="noopener noreferrer">Retrieval-Augmented LLM Agents: Learning to Learn from Experience&lt;/a>
+&lt;/strong> — Agents that improve by retrieving past experiences, no fine‑tuning required. Stores online experiences and retrieves them for unseen tasks—generalization without the overfitting.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://arxiv.org/abs/2603.18290" target="_blank" rel="noopener noreferrer">CORE: Robust Out-of-Distribution Detection via Confidence and Orthogonal Residual Scoring&lt;/a>
+&lt;/strong> — OOD detection that combines model confidence with orthogonal residuals. Post‑hoc, architecture‑agnostic, and actually works across benchmarks without retraining.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://arxiv.org/abs/2603.18029" target="_blank" rel="noopener noreferrer">Engineering Verifiable Modularity in Transformers via Per-Layer Supervision&lt;/a>
+&lt;/strong> — Per‑layer supervision to make Transformers less redundant. Causal control over specific layers—interpretability without the hand‑waving about “emergent behavior.”&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://arxiv.org/abs/2603.18031" target="_blank" rel="noopener noreferrer">InfoMamba: An Attention-Free Hybrid Mamba-Transformer Model&lt;/a>
+&lt;/strong> — Hybrid Mamba‑Transformer that scales linearly but keeps high‑rank token mixing. Attention is expensive? Here’s a alternative that doesn’t sacrifice capability.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://arxiv.org/abs/2603.18046" target="_blank" rel="noopener noreferrer">NANOZK: Layerwise Zero-Knowledge Proofs for Verifiable Large Language Model Inference&lt;/a>
+&lt;/strong> — ZK proofs for LLM inference that verify the exact model used without revealing weights. Prevents model substitution or quantization shenanigans—cryptographic receipts for proprietary models.&lt;/li>
+&lt;/ul>
+&lt;h2 id="ai-dev-tools">AI Dev Tools&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://github.com/vllm-project/vllm-omni" target="_blank" rel="noopener noreferrer">vllm-project/vllm-omni&lt;/a>
+&lt;/strong> — vLLM now handles text, image, audio, video in one engine. Optimized kernel fusion and memory management keep throughput high—if you’re building multi‑modal apps, this saves you from custom CUDA hell.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/google/adk-python" target="_blank" rel="noopener noreferrer">google/adk-python&lt;/a>
+&lt;/strong> — Google’s code‑first agent toolkit. Fine‑grained control over loops, tools, memory, plus safety guards and Cloud integration. For when “prompt chaining” isn’t cutting it anymore.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/NVIDIA/warp" target="_blank" rel="noopener noreferrer">NVIDIA/warp&lt;/a>
+&lt;/strong> — Write Python, get CUDA acceleration. Used in projects like Newton for high‑fidelity physics—spatial computing and simulation without leaving the Python ecosystem.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/anomalyco/opencode" target="_blank" rel="noopener noreferrer">anomalyco/opencode&lt;/a>
+&lt;/strong> — Open‑source coding agent with IDE integration and sandboxed execution. Generate, edit, review code via NLP, with safety checks. Because we all trust LLMs with production code, right?&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/apify/mcp-cli" target="_blank" rel="noopener noreferrer">Show HN: mcpc – Universal command-line client for Model Context Protocol&lt;/a>
+&lt;/strong> — CLI tool to interact with any MCP server from the terminal. List tools, invoke functions, inspect context—debug MCP integrations without writing a script.&lt;/li>
+&lt;/ul>
+&lt;h2 id="todays-synthesis">Today&amp;rsquo;s Synthesis&lt;/h2>
+&lt;p>If you’re deploying multi‑agent systems in production, the combination of &lt;strong>clyro&lt;/strong> for runtime governance, &lt;strong>memory-share-kit&lt;/strong> for deterministic memory management, and the retrieval‑augmented agent approach from the &lt;strong>Retrieval-Augmented LLM Agents&lt;/strong> paper gives you a stack that’s both reliable and adaptable. Use clyro to enforce policies before agents act, memory-share-kit to coordinate state across distributed components without race conditions, and implement retrieval from past experiences (as in the paper) to let agents generalize from history without costly fine‑tuning. This covers the “don’t blow up” and “learn from mistakes” bases—two things hype cycles rarely mention. 🔥&lt;/p></description></item><item><title>Tenkai Daily — March 19, 2026</title><link>https://tenkai.blog/posts/2026-03-19/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://tenkai.blog/posts/2026-03-19/</guid><description>&lt;h2 id="model-releases">Model Releases&lt;/h2>
 &lt;p>&lt;strong>&lt;a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16" target="_blank" rel="noopener noreferrer">nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16&lt;/a>
 &lt;/strong> — 120B parameter MoE language model in BF16, supporting European/Asian languages with Azure deployment.&lt;/p>
 &lt;p>&lt;strong>&lt;a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4" target="_blank" rel="noopener noreferrer">nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4&lt;/a>
