@@ -1,4 +1,56 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Open-Source on Tenkai</title><link>https://tenkai.blog/tags/open-source/</link><description>Recent content in Open-Source on Tenkai</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 19 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://tenkai.blog/tags/open-source/index.xml" rel="self" type="application/rss+xml"/><item><title>Tenkai Daily — March 19, 2026</title><link>https://tenkai.blog/posts/2026-03-19/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://tenkai.blog/posts/2026-03-19/</guid><description>&lt;h2 id="model-releases">Model Releases&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Open-Source on Tenkai</title><link>https://tenkai.blog/tags/open-source/</link><description>Recent content in Open-Source on Tenkai</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Fri, 20 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://tenkai.blog/tags/open-source/index.xml" rel="self" type="application/rss+xml"/><item><title>Tenkai Daily — March 20, 2026</title><link>https://tenkai.blog/posts/2026-03-20/</link><pubDate>Fri, 20 Mar 2026 00:00:00 +0000</pubDate><guid>https://tenkai.blog/posts/2026-03-20/</guid><description>&lt;h2 id="model-releases">Model Releases&lt;/h2>
+&lt;p>&lt;strong>&lt;a href="https://huggingface.co/zai-org/GLM-OCR" target="_blank" rel="noopener noreferrer">GLM-OCR Multilingual Optical Character Recognition Model&lt;/a>
+&lt;/strong> — A vision‑language model built on the GLM architecture, fine‑tuned for OCR across Chinese, English, French, Spanish, Russian, German, Japanese, and Korean. MIT licensed, Safetensors/Transformers ready, with arxiv paper 2603.10.&lt;/p>
+&lt;h2 id="open-source-releases">Open Source Releases&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://github.com/datalab-to/chandra" target="_blank" rel="noopener noreferrer">chandra&lt;/a>
+&lt;/strong> — Layout‑aware OCR that preserves tables, forms, and handwritten text while maintaining full document layout for higher accuracy on dense pages.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://pypi.org/project/langchain-mineru/0.1.3/" target="_blank" rel="noopener noreferrer">LangChain-MinerU 0.1.3 – PDF‑to‑Markdown Loader for LangChain&lt;/a>
+&lt;/strong> — Loader that runs MinerU on PDFs, outputting structured Markdown with headings, tables, and code blocks; ideal for feeding clean text into RAG pipelines.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://pypi.org/project/jupyter-ai-extension/1.0.0/" target="_blank" rel="noopener noreferrer">Jupyter AI Extension 1.0.0 – Multi‑LLM Support for Notebooks&lt;/a>
+&lt;/strong> — Sidebar lets you switch between OpenAI GPT, Claude, Gemini inside a notebook, triggering code generation, explanation, or debugging via natural‑language prompts.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/astral-sh/ty" target="_blank" rel="noopener noreferrer">ty&lt;/a>
+&lt;/strong> — Rust‑based Python type checker and language server delivering near‑instant feedback on type errors, boosting productivity in large ML codebases.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/vas3k/TaxHacker" target="_blank" rel="noopener noreferrer">TaxHacker&lt;/a>
+&lt;/strong> — Self‑hosted AI accounting app that uses LLMs to parse receipts, invoices, and transactions; keeps data local and extensible via plugins.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://pypi.org/project/ayechat-dev/0.45.1.20260320111503/" target="_blank" rel="noopener noreferrer">Aye Chat: Terminal-first AI Code Generator&lt;/a>
+&lt;/strong> — Terminal UI for prompting AI models to emit code snippets, integrating directly with local development workflows to speed up coding.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://pypi.org/project/intentkit/0.13.0/" target="_blank" rel="noopener noreferrer">IntentKit 0.13.0 – Core Package for Intent-based AI Agents&lt;/a>
+&lt;/strong> — Framework for building agents around user intents, providing recognition, dialogue, action modules and improved async support.&lt;/li>
+&lt;/ul>
+&lt;h2 id="research-worth-reading">Research Worth Reading&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://arxiv.org/abs/2603.18166" target="_blank" rel="noopener noreferrer">Efficient Dense Crowd Trajectory Prediction Via Dynamic Clustering&lt;/a>
+&lt;/strong> — Introduces a dynamic clustering method to predict trajectories in occluded crowds, improving scalability and accuracy for safety‑critical applications like stampede prevention.&lt;/li>
+&lt;/ul>
+&lt;h2 id="ai-dev-tools">AI Dev Tools&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://github.com/vllm-project/vllm-omni" target="_blank" rel="noopener noreferrer">vllm-omni&lt;/a>
+&lt;/strong> — Extension of vLLM for efficient omni‑modality inference (vision‑language, audio‑language) with optimized memory usage and batching.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/google/adk-python" target="_blank" rel="noopener noreferrer">adk-python&lt;/a>
+&lt;/strong> — Google’s Agent Development Kit in Python; offers modular planning, tool use, and memory components compatible with various LLM backends.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/huggingface/skills" target="_blank" rel="noopener noreferrer">huggingface/skills&lt;/a>
+&lt;/strong> — Toolkit giving agents abilities to load, infer, and fine‑tune Hugging Face models; includes abstractions for prompt chaining, RAG, and tool use.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/microsoft/apm" target="_blank" rel="noopener noreferrer">apm&lt;/a>
+&lt;/strong> — Microsoft’s Agent Package Manager for discovering, installing, and versioning AI agent packages across teams.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/anthropics/skills" target="_blank" rel="noopener noreferrer">anthropics/skills&lt;/a>
+&lt;/strong> — Community‑driven skills repository for Claude agents (web search, code execution, data analysis) encouraging reuse and sharing.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/NVIDIA/warp" target="_blank" rel="noopener noreferrer">warp&lt;/a>
+&lt;/strong> — GPU‑kernel framework for accelerated simulation, data generation, and spatial computing; enables differentiable physics for ML research.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/anomalyco/opencode" target="_blank" rel="noopener noreferrer">opencode&lt;/a>
+&lt;/strong> — Open‑source coding agent that assists with generation, debugging, and refactoring via natural language, IDE‑agnostic and multi‑language.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.80" target="_blank" rel="noopener noreferrer">claude-code v2.1.80 adds rate limit display and inline plugin settings&lt;/a>
+&lt;/strong> — Adds a &lt;code>rate_limits&lt;/code> field to statusline scripts and lets you declare plugins inline in settings.json, improving visibility and extensibility.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/code-yeongyu/oh-my-openagent" target="_blank" rel="noopener noreferrer">oh-my-openagent&lt;/a>
+&lt;/strong> — Harness (formerly oh-my-opencode) that standardizes integrating LLM agents into dev workflows, with logging, monitoring, and easy backend swapping.&lt;/li>
+&lt;li>&lt;strong>&lt;a href="https://github.com/southleft/figma-console-mcp" target="_blank" rel="noopener noreferrer">figma-console-mcp&lt;/a>
+&lt;/strong> — Bridge exposing a Figma design system as an API, allowing agents to read, create, and debug UI components programmatically.&lt;/li>
+&lt;/ul>
+&lt;h2 id="mcp-servers--integrations">MCP Servers &amp;amp; Integrations&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>&lt;a href="https://smithery.ai/servers/agentmail" target="_blank" rel="noopener noreferrer">AgentMail MCP Server&lt;/a>
+&lt;/strong> — Provides AI agents with their own email inbox API (via Gmail) to send, receive, and manage&lt;/li>
+&lt;/ul></description></item><item><title>Tenkai Daily — March 19, 2026</title><link>https://tenkai.blog/posts/2026-03-19/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://tenkai.blog/posts/2026-03-19/</guid><description>&lt;h2 id="model-releases">Model Releases&lt;/h2>
 &lt;p>&lt;strong>&lt;a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16" target="_blank" rel="noopener noreferrer">nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-BF16&lt;/a>
 &lt;/strong> — 120B parameter MoE language model in BF16, supporting European/Asian languages with Azure deployment.&lt;/p>
 &lt;p>&lt;strong>&lt;a href="https://huggingface.co/nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4" target="_blank" rel="noopener noreferrer">nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4&lt;/a>
