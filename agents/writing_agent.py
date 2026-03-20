@@ -68,7 +68,7 @@ def fetch_free_model_ids(api_key: str) -> list[str]:
 
 
 def _try_model(content: str, model: str, headers: dict) -> str | None:
-    """Return text on success, None on 429, raise on other errors."""
+    """Return text on success, None on 429 or empty content, raise on other errors."""
     payload = {
         "model": model,
         "messages": [
@@ -83,7 +83,21 @@ def _try_model(content: str, model: str, headers: dict) -> str | None:
         print(f"  {model}: rate limited — {r.text[:200]}", file=sys.stderr)
         return None
     r.raise_for_status()
-    return r.json()["choices"][0]["message"]["content"].strip()
+    text = r.json()["choices"][0]["message"]["content"]
+    if not text:
+        print(f"  {model}: empty content in response", file=sys.stderr)
+        return None
+    return text.strip()
+
+
+def _has_sections(body: str) -> bool:
+    """Return True if the body has at least one ## section containing a markdown link."""
+    for section in re.split(r'(?=^## )', body, flags=re.MULTILINE):
+        if not section.startswith("## "):
+            continue
+        if re.search(r'\]\(https?://', section):
+            return True
+    return False
 
 
 def call_llm(content: str, preferred_model: str) -> str:
@@ -108,12 +122,17 @@ def call_llm(content: str, preferred_model: str) -> str:
         print(f"  Trying: {candidate}", file=sys.stderr)
         try:
             result = _try_model(content, candidate, headers)
-            if result is not None:
-                print(f"  Success: {candidate}", file=sys.stderr)
-                return result
-            # Rate limited — wait before trying next
-            print("  Waiting 15s before next model...", file=sys.stderr)
-            time.sleep(15)
+            if result is None:
+                # Rate limited or empty — wait before trying next
+                print("  Waiting 15s before next model...", file=sys.stderr)
+                time.sleep(15)
+                continue
+            if not _has_sections(result):
+                print(f"  {candidate}: response missing sections, skipping", file=sys.stderr)
+                time.sleep(15)
+                continue
+            print(f"  Success: {candidate}", file=sys.stderr)
+            return result
         except httpx.HTTPStatusError as e:
             print(f"  {candidate} HTTP {e.response.status_code}, skipping", file=sys.stderr)
         except Exception as e:

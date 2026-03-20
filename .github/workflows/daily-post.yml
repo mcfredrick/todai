@@ -4,6 +4,11 @@ on:
   schedule:
     - cron: '0 8 * * *'  # 08:00 UTC daily
   workflow_dispatch:
+    inputs:
+      skip_research:
+        description: 'Skip research agent and reuse cached research.json from last run'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -44,21 +49,49 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python agents/model_selector.py
 
+      - name: Restore cached research.json
+        if: env.SKIP_AGENTS != 'true' && inputs.skip_research
+        uses: actions/download-artifact@v4
+        with:
+          name: research-json
+          path: /tmp
+
       - name: Run research agent
-        if: env.SKIP_AGENTS != 'true'
+        if: env.SKIP_AGENTS != 'true' && !inputs.skip_research
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python agents/research_agent.py
 
+      - name: Upload research.json as artifact
+        if: env.SKIP_AGENTS != 'true' && !inputs.skip_research
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-json
+          path: /tmp/research.json
+          retention-days: 7
+
       - name: Cooldown between agents
-        if: env.SKIP_AGENTS != 'true'
+        if: env.SKIP_AGENTS != 'true' && !inputs.skip_research
         run: sleep 90  # Let free-tier rate limit window reset after research agent
 
-      - name: Run writing agent
+      - name: Run writing agent and validate (with retry)
         if: env.SKIP_AGENTS != 'true'
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: python agents/writing_agent.py
+        run: |
+          POST="content/posts/$(date -u +%Y-%m-%d).md"
+          for attempt in 1 2 3; do
+            echo "=== Writing attempt $attempt ==="
+            python agents/writing_agent.py
+            if python agents/validate_post.py "$POST"; then
+              echo "Validation passed on attempt $attempt"
+              exit 0
+            fi
+            echo "Validation failed, retrying writing agent in 30s..."
+            sleep 30
+          done
+          echo "All writing attempts failed validation"
+          exit 1
 
       - name: Cache fastembed model
         uses: actions/cache@v4
