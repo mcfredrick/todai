@@ -1131,6 +1131,150 @@
     {
       "url": "https://pypi.org/project/thinkhive/4.2.0/",
       "date": "2026-03-19"
+    },
+    {
+      "url": "https://github.com/HKUDS/LightRAG",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/microsoft/qlib",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/SigNoz/signoz",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/langchain-ai/deepagentsjs",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://huggingface.co/HauhauCS/Qwen3.5-35B-A3B-Uncensored-HauhauCS-Aggressive",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://huggingface.co/baidu/Qianfan-OCR",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://huggingface.co/ibm-granite/granite-4.0-1b-speech",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-9b-kv",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18104",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18122",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18197",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18201",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18272",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18290",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18329",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18017",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18029",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18031",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18032",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18037",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18046",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18056",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18074",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18079",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18083",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://arxiv.org/abs/2603.18088",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/Aherontas/Pycon_Greece_2025_Presentation_Agents",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/apify/mcp-cli",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=43506068",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=43368327",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://news.ycombinator.com/item?id=46220577",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://github.com/ahujasid/ableton-mcp",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/synthpilot/1.1.39/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/lucerna/0.1.0/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/swarmauri-metric-wasserstein/0.9.0.dev43/",
+      "date": "2026-03-20"
+    },
+    {
+      "url": "https://pypi.org/project/swarmauri-llm-openai/0.1.0.dev4/",
+      "date": "2026-03-20"
     }
   ]
 }
