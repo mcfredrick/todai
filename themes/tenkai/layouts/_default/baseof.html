@@ -36,6 +36,29 @@
       pre.appendChild(btn);
     });
 
+    // Copy link buttons on post entries
+    var ICON_LINK = '<svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>';
+    document.querySelectorAll('.post-content p').forEach(function(p) {
+      var strong = p.firstElementChild;
+      if (!strong || strong.tagName !== 'STRONG') return;
+      var a = strong.firstElementChild;
+      if (!a || a.tagName !== 'A') return;
+      var slug = a.textContent.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      p.id = slug;
+      var btn = document.createElement('button');
+      btn.className = 'entry-link-btn';
+      btn.setAttribute('aria-label', 'Copy link to this entry');
+      btn.innerHTML = ICON_LINK;
+      btn.addEventListener('click', function() {
+        var url = window.location.origin + window.location.pathname + '#' + slug;
+        navigator.clipboard.writeText(url).then(function() {
+          btn.classList.add('copied');
+          setTimeout(function() { btn.classList.remove('copied'); }, 1500);
+        });
+      });
+      strong.appendChild(btn);
+    });
+
     document.getElementById('theme-toggle').addEventListener('click', function() {
       var html = document.documentElement;
       var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
