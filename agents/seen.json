@@ -1371,6 +1371,78 @@
     {
       "url": "https://pypi.org/project/streamlit-realtime-audio/0.0.8/",
       "date": "2026-03-21"
+    },
+    {
+      "url": "https://github.com/meta-pytorch/OpenEnv",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://github.com/anthropics/claude-plugins-official",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://github.com/simular-ai/Agent-S",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://github.com/skypilot-org/skypilot",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://github.com/daytonaio/daytona",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://huggingface.co/baidu/Qianfan-OCR",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://huggingface.co/zai-org/GLM-OCR",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://huggingface.co/nvidia/Nemotron-Cascade-2-30B-A3B",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://pypi.org/project/memorycoreclaw/2.1.1/",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://pypi.org/project/tokenfence/0.3.1/",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://pypi.org/project/distill-mcp/0.3.0/",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://pypi.org/project/cureview/0.1.3/",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://pypi.org/project/sentryix/1.0.1/",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://pypi.org/project/agent-strace/0.4.0/",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://pypi.org/project/open-vulnera/0.1.5/",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://pypi.org/project/visibe/0.1.11/",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://pypi.org/project/dbgpt/0.8.0rc4/",
+      "date": "2026-03-22"
+    },
+    {
+      "url": "https://pypi.org/project/briefcase-ai/3.0.0/",
+      "date": "2026-03-22"
     }
   ]
 }
